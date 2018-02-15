@@ -36,7 +36,7 @@ TODO
 
 * Create a Kubernetes cluster with [IBM Cloud Container Service](https://console.bluemix.net/containers-kubernetes/catalog/cluster) to deploy in cloud.
 
-* Once ypur cluster is ready, follow the steps provided `Dashboard -> Clusters -> Access` to gain access of your cluster.
+* Once your cluster is ready, follow the steps provided `Dashboard -> Clusters -> Access` to gain access of your cluster.
 
 # Steps
 
