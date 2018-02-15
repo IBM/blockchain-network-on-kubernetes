@@ -1,16 +1,16 @@
 ## ** Work in Progress **
 # Set up of Blockchain network using Kubernetes Cluster on IBM Cloud
 
-For developing any blockchain (Hyperledger Fabric) application, you need to setup a blockchain network to develop, test and execute the application. Blockchain network can be setup in multiple ways. 
-* Setup blockchain network locally (http://hyperledger-fabric.readthedocs.io/en/release/build_network.html)
-* Use blockchain network hosted on IBM Cloud (https://console.bluemix.net/catalog/services/blockchain)
-* Setup blockchain network using Kubernetes Cluster on IBM Cloud.
+For developing any blockchain (Hyperledger Fabric) application, you need to setup a Hyperledger Fabric network to develop, test and execute the application. Hyperledger Fabric network can be setup in multiple ways. 
+* Setup Hyperledger Fabric network locally (http://hyperledger-fabric.readthedocs.io/en/release/build_network.html)
+* Use Hyperledger Fabric network hosted on IBM Cloud (https://console.bluemix.net/catalog/services/blockchain)
+* Setup Hyperledger Fabric network using Kubernetes Cluster on IBM Cloud.
 
-This pattern will demonstrate a way to setup your blockchain network using Kubernetes Cluster on IBM Cloud.
+This pattern demonstrates a way to setup your Hyperledger Fabric network using Kubernetes Cluster on IBM Cloud.
 
-Hosting the blockchain network on [IBM Cloud](https://console.bluemix.net/) using [IBM Cloud Container Service](https://console.bluemix.net/containers-kubernetes/catalog/cluster) will provide you additional benefits like multiple users can work on the same setup, the setup can be used for different blockchain applications, the setup can be reused and so on.
+Hosting the Hyperledger Fabric network on [IBM Cloud](https://console.bluemix.net/) using [IBM Cloud Container Service](https://console.bluemix.net/containers-kubernetes/catalog/cluster) will provide you additional benefits like multiple users can work on the same setup, the setup can be used for different blockchain applications, the setup can be reused and so on.
 
-This pattern will provide you the scripts to automate the process for setting up blockchain network using Kubernetes Cluster on IBM Cloud.
+This pattern provides you the scripts to automate the process for setting up Hyperledger Fabric network using Kubernetes Cluster on IBM Cloud.
 
 ## Included components
 
@@ -40,7 +40,10 @@ TODO
 
 # Steps
 
-Follow these steps to setup and run this code pattern.
+Follow these steps to setup and run this code pattern. To do hyperledger fabric network setup run the script provided.
+./setup_blockchainnetwork.sh
+
+
 
 # Troubleshooting
 
