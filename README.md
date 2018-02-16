@@ -40,7 +40,10 @@ TODO
 
 # Steps
 
-Follow these steps to setup and run this code pattern. To do hyperledger fabric network setup run the script provided.
+The network for which scripts are provided includes 4org and one peer in each org, one orderer, ca corresponding to each peer and orderer. If you want to change in this, accordingly yaml files need to modify.
+Follow these steps to setup and run this code pattern. 
+If there is any change in network topology, modify the files before execution.
+To do hyperledger fabric network setup run the script provided.
 ./setup_blockchainnetwork.sh
 
 
