@@ -53,10 +53,10 @@ TODO
 1. Create a Kubernetes Cluster on IBM Cloud
 2. Setting up CLIs
 3. Gain access to your Kubernetes Cluster
-4. Deploy Hyperledger Fabric Network Topology into Kubernetes Cluster
+4. Deploy Hyperledger Fabric Network into Kubernetes Cluster
+5. View the Kubernetes Dashboard
 
-## 1. Setup IBM Cloud Container Service
-### 1. Create a Kubernetes Cluster
+### 1. Create a Kubernetes Cluster on IBM Cloud
 
 * Create a Kubernetes cluster with [IBM Cloud Container Service](https://console.bluemix.net/containers-kubernetes/catalog/cluster) using GUI. This pattern uses the _lite cluster_.
 
@@ -82,9 +82,14 @@ Note: It can take up to 15 minutes for the worker node machine to be ordered and
     Client Version: v1.7.4
     Server Version: v1.7.4-1+1540c973d4ff9d
     ```
-## 4. Deploy Hyperledger Fabric network topology into Kubernetes clusters
+### 4. Deploy Hyperledger Fabric network into Kubernetes clusters
 
-### Copy Kubernetes configuration scripts
+#### Understand the network topology
+
+The network for which scripts are provided includes 4org and one peer in each org, one orderer, ca corresponding to each peer and orderer. If you want to change in this, accordingly yaml files need to modify.
+
+#### Copy Kubernetes configuration scripts
+
 Clone or download the Kubernetes configuration scripts to your user home directory.
 ```
 $ git clone https://github.com/IBM/blockchain-network-on-kubernetes.git
@@ -96,13 +101,19 @@ $ cd blockchain-network-on-kubernetes
 $ ls
 ```
 
+#### Modify the Kubernetes configuration scripts
 
-
-The network for which scripts are provided includes 4org and one peer in each org, one orderer, ca corresponding to each peer and orderer. If you want to change in this, accordingly yaml files need to modify.
-Follow these steps to setup and run this code pattern. 
 If there is any change in network topology, modify the files before execution.
-To do hyperledger fabric network setup run the script provided.
-./setup_blockchainnetwork.sh
+
+#### Run the script to deploy your Hyperledger Fabric Network
+
+To deploy hyperledger fabric network, run the script.
+
+`./setup_blockchainNetwork.sh`
+
+Note: Before running the script, please check your environment. You should able to run properly `kubectl commands`with your cluster as explained in step3. 
+
+### 5. View the Kubernetes Dashboard
 
 
 
