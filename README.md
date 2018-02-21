@@ -60,7 +60,7 @@ TODO
 
 * Create a Kubernetes cluster with [IBM Cloud Container Service](https://console.bluemix.net/containers-kubernetes/catalog/cluster) using GUI. This pattern uses the _lite cluster_.
 
-Note: It can take up to 15 minutes for the worker node machine to be ordered and for the cluster to be set up and provisioned.
+  Note: It can take up to 15 minutes for the worker node machine to be ordered and for the cluster to be set up and provisioned.
 
 
 ### 2. Setting up CLIs
@@ -70,18 +70,25 @@ Note: It can take up to 15 minutes for the worker node machine to be ordered and
 * Install [Kubernetes CLI](https://kubernetes.io/docs/tasks/tools/install-kubectl/). The prefix for running commands by using the Kubernetes CLI is `kubectl`.
 
 * Install the container service plugin using the following command.
-`bx plugin install container-service -r Bluemix`
+
+  `bx plugin install container-service -r Bluemix`
 
 ### 3. Gain access to your cluster
-  Once your cluster is ready, follow the steps provided `IBM Cloud Dashboard -> <your cluster> -> Access` to gain access of your cluster.
-  >>>snapshot
+  
+  * Once your cluster is ready, open the access tab `IBM Cloud Dashboard -> <your cluster> -> Access` as shown in snapshot.
+  
+    ![](images/gain-access-to-cluster.jpg)
+  
+  * Perform the step provided under the section `Gain access to your cluster`.
 
   * Verify that the kubectl commands run properly with your cluster by checking the Kubernetes CLI server version.
+  
     ```
     $ kubectl version  --short
-    Client Version: v1.7.4
-    Server Version: v1.7.4-1+1540c973d4ff9d
+    Client Version: v1.9.2
+    Server Version: v1.8.6-4+9c2a4c1ed1ee7e
     ```
+    
 ### 4. Deploy Hyperledger Fabric network into Kubernetes clusters
 
 #### Understand the network topology
