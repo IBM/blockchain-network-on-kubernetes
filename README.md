@@ -120,6 +120,8 @@ To deploy hyperledger fabric network, run the script.
 
 Note: Before running the script, please check your environment. You should able to run properly `kubectl commands`with your cluster as explained in step3. 
 
+#### Delete the network
+
 ### 5. View the Kubernetes Dashboard
 
 
