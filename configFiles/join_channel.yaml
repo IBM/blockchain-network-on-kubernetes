@@ -1,0 +1,73 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: joinchannel
+spec:
+  backoffLimit: 2
+  template:
+    metadata:
+      name: joinchannel
+    spec:
+      restartPolicy: "Never"
+      volumes:
+      - name: sharedvolume
+        persistentVolumeClaim:
+          claimName: shared-pvc
+      containers:
+      - name: joinchannel1
+        image: hyperledger/fabric-peer:x86_64-1.0.4
+        imagePullPolicy: Always
+        command: ["sh", "-c", "peer channel fetch newest -o ${ORDERER_URL} -c ${CHANNEL_NAME} && peer channel join -b ${CHANNEL_NAME}_newest.block "]
+        env:
+        - name: CHANNEL_NAME
+          value: channel1
+        - name: CORE_PEER_NETWORKID
+          value: nid1
+        - name: ORDERER_URL
+          value: blockchain-orderer:31010
+        - name: CORE_PEER_ADDRESS
+          value: blockchain-org1peer1:30110
+        - name: CORE_PEER_LOCALMSPID
+          value: Org1MSP
+        - name: CORE_PEER_MSPID
+          value: Org1MSP
+        - name: CORE_LOGGING_LEVEL
+          value: debug
+        - name: CORE_PEER_MSPCONFIGPATH
+          value: /shared/crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp
+        - name: FABRIC_CFG_PATH
+          value: /etc/hyperledger/fabric
+        - name: GODEBUG
+          value: "netdns=go"
+        volumeMounts:
+        - mountPath: /shared
+          name: sharedvolume
+      - name: joinchannel2
+        image: hyperledger/fabric-peer:x86_64-1.0.4
+        imagePullPolicy: Always
+        command: ["sh", "-c", "peer channel fetch newest -o ${ORDERER_URL} -c ${CHANNEL_NAME} && peer channel join -b ${CHANNEL_NAME}_newest.block "]
+        env:
+        - name: CHANNEL_NAME
+          value: channel1
+        - name: CORE_PEER_NETWORKID
+          value: nid1
+        - name: ORDERER_URL
+          value: blockchain-orderer:31010
+        - name: CORE_PEER_ADDRESS
+          value: blockchain-org2peer1:30210
+        - name: CORE_PEER_LOCALMSPID
+          value: Org2MSP
+        - name: CORE_PEER_MSPID
+          value: Org2MSP
+        - name: CORE_LOGGING_LEVEL
+          value: debug
+        - name: CORE_PEER_MSPCONFIGPATH
+          value: /shared/crypto-config/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp
+        - name: FABRIC_CFG_PATH
+          value: /etc/hyperledger/fabric
+        - name: GODEBUG
+          value: "netdns=go"
+        volumeMounts:
+        - mountPath: /shared
+          name: sharedvolume

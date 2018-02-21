@@ -1,0 +1,61 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: chaincodeinstall
+spec:
+  backoffLimit: 2
+  template:
+    metadata:
+      name: chaincodeinstall
+    spec:
+      restartPolicy: "Never"
+      volumes:
+      - name: sharedvolume
+        persistentVolumeClaim:
+          claimName: shared-pvc
+      containers:
+      - name: chaincodeinstall
+        image: hyperledger/fabric-tools:x86_64-1.0.4
+        imagePullPolicy: Always
+        command: ["sh", "-c", "echo $GOPATH; cp -r /shared/config/chaincode/ $GOPATH/src/; ls $GOPATH/src; peer chaincode install -n ${CHAINCODE_NAME} -v ${CHAINCODE_VERSION} -p chaincode_example02/"]
+        env:
+        - name: CHAINCODE_NAME
+          value: "cc"
+        - name: CHAINCODE_VERSION
+          value: "1.0"
+        - name: FABRIC_CFG_PATH
+          value: /etc/hyperledger/fabric
+        - name: CORE_PEER_MSPCONFIGPATH
+          value: /shared/crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp
+        - name: CORE_PEER_LOCALMSPID
+          value: Org1MSP
+        - name: CORE_PEER_ADDRESS
+          value: blockchain-org1peer1:30110
+        - name: GODEBUG
+          value: "netdns=go"
+        volumeMounts:
+        - mountPath: /shared
+          name: sharedvolume
+      - name: chaincodeinstall1
+        image: hyperledger/fabric-tools:x86_64-1.0.4
+        imagePullPolicy: Always
+        command: ["sh", "-c", "echo $GOPATH; cp -r /shared/config/chaincode/ $GOPATH/src/; ls $GOPATH/src; peer chaincode install -n ${CHAINCODE_NAME} -v ${CHAINCODE_VERSION} -p chaincode_example02/"]
+        env:
+        - name: CHAINCODE_NAME
+          value: "cc"
+        - name: CHAINCODE_VERSION
+          value: "1.0"
+        - name: FABRIC_CFG_PATH
+          value: /etc/hyperledger/fabric
+        - name: CORE_PEER_MSPCONFIGPATH
+          value: /shared/crypto-config/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp
+        - name: CORE_PEER_LOCALMSPID
+          value: Org2MSP
+        - name: CORE_PEER_ADDRESS
+          value: blockchain-org2peer1:30210
+        - name: GODEBUG
+          value: "netdns=go"
+        volumeMounts:
+        - mountPath: /shared
+          name: sharedvolume

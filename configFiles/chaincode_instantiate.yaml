@@ -1,0 +1,66 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: chaincodeinstantiate
+spec:
+  backoffLimit: 5
+  template:
+    metadata:
+      name: chaincodeinstantiate
+    spec:
+      restartPolicy: "Never"
+      volumes:
+      - name: sharedvolume
+        persistentVolumeClaim:
+          claimName: shared-pvc
+
+      containers:
+      - name: chaincodeinstantiate
+        image: hyperledger/fabric-tools:x86_64-1.0.4
+        imagePullPolicy: Always
+        command: ["sh", "-c", "peer chaincode instantiate -o blockchain-orderer:31010 -C ${CHANNEL_NAME} -n ${CHAINCODE_NAME} -v ${CHAINCODE_VERSION} -c '{\"Args\":[\"init\",\"a\",\"100\",\"b\",\"200\"]}'"]
+        env:
+        - name: CHANNEL_NAME
+          value: channel1
+        - name: CHAINCODE_NAME
+          value: "cc"
+        - name: CHAINCODE_VERSION
+          value: "1.0"
+        - name: FABRIC_CFG_PATH
+          value: /etc/hyperledger/fabric
+        - name: CORE_PEER_MSPCONFIGPATH
+          value: /shared/crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp
+        - name: CORE_PEER_LOCALMSPID
+          value: Org1MSP
+        - name: CORE_PEER_ADDRESS
+          value: blockchain-org1peer1:30110
+        - name: GODEBUG
+          value: "netdns=go"
+        volumeMounts:
+        - mountPath: /shared
+          name: sharedvolume
+      - name: chaincodeinstantiate1
+        image: hyperledger/fabric-tools:x86_64-1.0.4
+        imagePullPolicy: Always
+        command: ["sh", "-c", "peer chaincode instantiate -o blockchain-orderer:31010 -C ${CHANNEL_NAME} -n ${CHAINCODE_NAME} -v ${CHAINCODE_VERSION} -c '{\"Args\":[\"init\",\"a\",\"100\",\"b\",\"200\"]}'"]
+        env:
+        - name: CHANNEL_NAME
+          value: channel1
+        - name: CHAINCODE_NAME
+          value: "cc"
+        - name: CHAINCODE_VERSION
+          value: "1.0"
+        - name: FABRIC_CFG_PATH
+          value: /etc/hyperledger/fabric
+        - name: CORE_PEER_MSPCONFIGPATH
+          value: /shared/crypto-config/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp
+        - name: CORE_PEER_LOCALMSPID
+          value: Org2MSP
+        - name: CORE_PEER_ADDRESS
+          value: blockchain-org2peer1:30210
+        - name: GODEBUG
+          value: "netdns=go"
+        volumeMounts:
+        - mountPath: /shared
+          name: sharedvolume
