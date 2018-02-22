@@ -97,7 +97,7 @@ TODO
 
 #### Understand the network topology
 
-This pattern provides a script which automatically provisions a sample Hyperledger Fabric network consisting of four organizations, each maintaining one peer node, and a 'solo' ordering service. Also, the script creates a channel named as `channel1`, joins all peers to the channel `channel1`, deploy and instantiate chaincode. The pattern will also help to drive execution of transactions against the deployed chaincode.
+This pattern provides a script which automatically provisions a sample Hyperledger Fabric network consisting of four organizations, each maintaining one peer node, and a 'solo' ordering service. Also, the script creates a channel named as `channel1`, joins all peers to the channel `channel1`, deploy and instantiate chaincode on all peers. The pattern will also help to drive execution of transactions against the deployed chaincode.
 
 #### Copy Kubernetes configuration scripts
 
@@ -118,11 +118,11 @@ In the source directory,
   
 #### Modify the Kubernetes configuration scripts
 
-If there is any change in network topology, need to modify the configuration files(.yaml files) appropriately located in `artifacts` and `configFiles` directory. Everytime you do not need to make changes in all the files. It all depends on your network topology. For example, if you decide to increase/decrease the capacity of persistant volume then you need to modify `createVolume.yaml` only.  
+If there is any change in network topology, need to modify the configuration files(.yaml files) appropriately. The configuration files are located in `artifacts` and `configFiles` directory. Everytime you do not need to make changes in all the files. It all depends on your network topology. For example, if you decide to increase/decrease the capacity of persistant volume then you need to modify `createVolume.yaml` only.  
 
 #### Run the script to deploy your Hyperledger Fabric Network
 
-Once you have completed the changes in configuration files, you are ready to deploy your network. Execute the script to setup your hyperledger fabric network.
+Once you have completed the changes in configuration files, you are ready to deploy your network. Execute the script to deploy your hyperledger fabric network.
 
 ```
 $ ./setup_blockchainNetwork.sh
@@ -132,7 +132,7 @@ Note: Before running the script, please check your environment. You should able 
 
 #### Delete the network
 
-If required, you can bring the network down as well. The script `deleteNetwork.sh` is provided to achieve that. The script will delete all your pods, jobs, deployments and so on from your kubernetes cluster.
+If required, you can bring your hyperledger fabric network down as well. The script `deleteNetwork.sh` is provided to achieve that. The script will delete all your pods, jobs, deployments etc. from your Kubernetes cluster.
 
 ```
 $ ./deleteNetwork.sh
@@ -142,24 +142,23 @@ $ ./deleteNetwork.sh
 
 ### 6. View the Kubernetes Dashboard
 
-Obtain the token using the following command to authenticate to Kubernetes dashboard.
+Obtain the token using the following command to authenticate for Kubernetes dashboard.
 
 ```
-kubectl config view -o jsonpath='{.users[0].user.auth-provider.config.id-token}'
+$ kubectl config view -o jsonpath='{.users[0].user.auth-provider.config.id-token}'
 ```
 
-Copy the token and launch your Kubernetes dashboard with the default port 8001.
+Copy the token. Launch your Kubernetes dashboard with the default port 8001.
 
 ```
-kubectl proxy
+$ kubectl proxy
 ```
 
-Open the following URL in a web browser to see the Kubernetes dashboard. http://localhost:8001/ui
-It will prompt for the token.
+Open the URL http://localhost:8001/ui in a web browser to see the Kubernetes dashboard. It will prompt for the authentication.
 
 ![](images/provide-token-for-dashboard.png)
 
-Provide the token and `SIGN-IN`. In the Workloads tab, you can see the resources that you created.
+Provide the token and `SIGN-IN`. In the Workloads tab, you can see the resources that was created through scripts.
 
 ![](images/kubernetes-dashboard.png)
 
