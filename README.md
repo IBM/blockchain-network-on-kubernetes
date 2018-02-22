@@ -52,12 +52,14 @@ TODO
 
 ## Steps
 
-1. Create a Kubernetes Cluster on IBM Cloud
-2. Setting up CLIs
-3. Gain access to your Kubernetes Cluster
-4. Deploy Hyperledger Fabric Network into Kubernetes Cluster
-5. Test the deployed network
-6. View the Kubernetes Dashboard
+Follow these steps to setup and run this code pattern. 
+
+1. [Create a Kubernetes Cluster on IBM Cloud](#1-create-a-kubernetes-cluster-on-ibm-cloud)
+2. [Setting up CLIs](#2-setting-up-clis)
+3. [Gain access to your Kubernetes Cluster](#3-gain-access-to-your-kubernetes-cluster)
+4. [Deploy Hyperledger Fabric Network into Kubernetes Cluster](#4-deploy-hyperledger-fabric-network-into-kubernetes-cluster)
+5. [Test the deployed network](#5-test-the-deployed-network)
+6. [View the Kubernetes Dashboard](#6-view-the-kubernetes-dashboard)
 
 ### 1. Create a Kubernetes Cluster on IBM Cloud
 
@@ -132,7 +134,7 @@ Note: Before running the script, please check your environment. You should able 
 
 #### Delete the network
 
-If required, you can bring your hyperledger fabric network down as well. The script `deleteNetwork.sh` is provided to achieve that. The script will delete all your pods, jobs, deployments etc. from your Kubernetes cluster.
+If required, you can bring your hyperledger fabric network down using the script `deleteNetwork.sh`. This script will delete all your pods, jobs, deployments etc. from your Kubernetes cluster.
 
 ```
 $ ./deleteNetwork.sh
@@ -153,7 +155,7 @@ blockchain-org3peer1-59b6d99c45-dhtbp   1/1       Running   0          4m
 blockchain-org4peer1-6b6c99c45-wz9wm    1/1       Running   0          4m
 ```
 
-As mentioned above, the script join all peers on one channel `channel1`, deploy and instantiate chaincode on all peers. It means we can execute an invoke/query command on any peer and the response should be same on all peers. We can use CLI commands to test this. Get into a bash shell of any peer using the following command.
+As mentioned above, the script join all peers on one channel `channel1`, deploy and instantiate chaincode on all peers. It means we can execute an invoke/query command on any peer and the response should be same on all peers. Please note that in this pattern tls certs are disabled to avoid complexity. We are using CLI commands to test this network. Get into a bash shell of any peer using the following command.
 
 ```
 $ kubectl exec -it blockchain-org1peer1-747d6bdff4-4kzts bash
@@ -199,6 +201,7 @@ Provide the token and `SIGN-IN`. In the Workloads tab, you can see the resources
 
 ![](images/kubernetes-dashboard.png)
 
+The hyperledger fabric network is ready to use. You can start developing your blockchain applications using node sdk or hyperledger composer for this network.
 
 ## Troubleshooting
 
