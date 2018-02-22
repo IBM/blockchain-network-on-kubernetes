@@ -79,7 +79,7 @@ Follow these steps to setup and run this code pattern.
   bx plugin install container-service -r Bluemix
   ```
 
-### 3. Gain access to your cluster
+### 3. Gain access to your Kubernetes Cluster
   
   * Once your cluster is ready, open the access tab `IBM Cloud Dashboard -> <your cluster> -> Access` as shown in snapshot.
   
@@ -95,7 +95,7 @@ Follow these steps to setup and run this code pattern.
     Server Version: v1.8.6-4+9c2a4c1ed1ee7e
     ```
     
-### 4. Deploy Hyperledger Fabric network into Kubernetes clusters
+### 4. Deploy Hyperledger Fabric Network into Kubernetes Cluster
 
 #### Understand the network topology
 
