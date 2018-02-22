@@ -118,7 +118,7 @@ In the source directory,
   
 #### Modify the Kubernetes configuration scripts
 
-If there is any change in network topology, need to modify the configuration files(.yaml files) appropriately. The configuration files are located in `artifacts` and `configFiles` directory. Everytime you do not need to make changes in all the files. It all depends on your network topology. For example, if you decide to increase/decrease the capacity of persistant volume then you need to modify `createVolume.yaml` only.  
+If there is any change in network topology, need to modify the configuration files(.yaml files) appropriately. The configuration files are located in `artifacts` and `configFiles` directory. For example, if you decide to increase/decrease the capacity of persistant volume then you need to modify `createVolume.yaml` only.  
 
 #### Run the script to deploy your Hyperledger Fabric Network
 
@@ -139,6 +139,43 @@ $ ./deleteNetwork.sh
 ```
 
 ### 5. Test the deployed network
+
+After successful execution of the script `setup_blockchainNetwork.sh`, check the status of pods.
+
+```
+$ kubectl get pods
+NAME                                    READY     STATUS    RESTARTS   AGE
+blockchain-ca-7848c48d64-2cxr5          1/1       Running   0          4m
+blockchain-orderer-596ccc458f-thdgn     1/1       Running   0          4m
+blockchain-org1peer1-747d6bdff4-4kzts   1/1       Running   0          4m
+blockchain-org2peer1-7794d9b8c5-sn2qf   1/1       Running   0          4m
+blockchain-org3peer1-59b6d99c45-dhtbp   1/1       Running   0          4m
+blockchain-org4peer1-6b6c99c45-wz9wm    1/1       Running   0          4m
+```
+
+As mentioned above, the script join all peers on one channel `channel1`, deploy and instantiate chaincode on all peers. It means we can execute an invoke/query command on any peer and the response should be same on all peers. We can use CLI commands to test this. Get into a bash shell of any peer using the following command.
+
+```
+$ kubectl exec -it blockchain-org1peer1-747d6bdff4-4kzts bash
+```
+
+**Query**
+
+Chaincode was instantiated with thevalues as `{ a: 100, b: 200 }`. Let’s query for the value of `a` to make sure the chaincode was properly instantiated.
+
+![](images/first-query.png)
+
+**Invoke**
+
+Now let’s move 20 from `a` to `b`. A new transaction will be generated and upon successful completion of transaction state will get updated.
+
+![](images/invoke.png)
+
+**Query**
+
+Let’s confirm that our previous invocation executed properly. We initialized the key `a` with a value of 100 and just removed 20 with our previous invocation. Therefore, a query against `a` should show 80.
+
+![](images/second-query.png)
 
 ### 6. View the Kubernetes Dashboard
 
