@@ -105,7 +105,7 @@ echo "Create Channel Completed Successfully"
 # echo "Preparing yaml for joinchannel pod"
 # sed -e "s/%PEER_ADDRESS%/${PEER_ADDRESS}/g" -e "s/%CHANNEL_NAME%/${CHANNEL_NAME}/g" -e "s/%PEER_MSPID%/${PEER_MSPID}/g" -e "s|%MSP_CONFIGPATH%|${MSP_CONFIGPATH}|g" ${KUBECONFIG_FOLDER}/join_channel.yaml.base > ${KUBECONFIG_FOLDER}/join_channel.yaml
 
-echo "\nCreating joinchannel job"
+echo -e "\nCreating joinchannel job"
 echo "Running: kubectl create -f ${KUBECONFIG_FOLDER}/join_channel.yaml"
 kubectl create -f ${KUBECONFIG_FOLDER}/join_channel.yaml
 
@@ -119,7 +119,7 @@ while [ "$(kubectl get pods --show-all| grep joinchannel | awk '{print $3}')" !=
 done
 echo "Join Channel Completed Successfully"
 
-echo "\nCreating installchaincode job"
+echo -e "\nCreating installchaincode job"
 echo "Running: kubectl create -f ${KUBECONFIG_FOLDER}/chaincode_install.yaml"
 kubectl create -f ${KUBECONFIG_FOLDER}/chaincode_install.yaml
 
@@ -133,7 +133,7 @@ while [ "$(kubectl get pods --show-all| grep chaincodeinstall | awk '{print $3}'
 done
 echo "Chaincode Install Completed Successfully"
 
-echo "\nCreating chaincodeinstantiate job"
+echo -e "\nCreating chaincodeinstantiate job"
 echo "Running: kubectl create -f ${KUBECONFIG_FOLDER}/chaincode_instantiate.yaml"
 kubectl create -f ${KUBECONFIG_FOLDER}/chaincode_instantiate.yaml
 
