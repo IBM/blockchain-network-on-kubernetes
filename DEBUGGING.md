@@ -1,18 +1,24 @@
 Troubleshooting
 ===============
 
-Jupyter Notebooks
------------------
+* Always start your network fresh. Use the script `deleteNetwork.sh` to delete any pre-existing jobs/pods etc.
 
-* Make sure the pip install ran correctly. You might need to restart the
-  kernel and run the cells from the top after the pip install runs the first
-  time.
-* Many of the cells rely on variables that are set in earlier cells. Some of
-  these are cleared in later cells. Start over at the top when troubleshooting.
-* Many of the cells rely on service credentials from Bluemix that are set in
-  earlier cells. Make sure to add your service credentials correctly.
-
-Node-RED
---------
-
-* Make sure that the websocket URL has been updated with the NODERED_BASE_URL in the HTML code. Refer to section `5. Update the websocket URL in HTML code` in the documentation for details.
+* If you see below error, then environment is not set properly and therefore kubectl commands will not work.
+  ```
+  $ kubectl get pods
+  The connection to the server localhost:8080 was refused - did you specify the right host or port?
+  ```
+  
+* If you see below error, it means this peer has not joined the channel and so your query will not work.
+  ![](images/error1.png)
+  
+* If you see something similar to the following:
+  ![](images/error2.png)
+  
+  It shows there is some error in command. For example, in this snapshot `-c` is missing before passing arguments.
+  
+* If you see the below error,
+  ![](images/error3.png)
+  
+  There is something wrong with the setup. You would like to do setup from a fresh.
+  
