@@ -25,7 +25,8 @@ When the reader has completed this pattern, they will understand how to:
 
 1. Log in to IBM Cloud CLI and initialize IBM Cloud Container Service plugin.
 2. Set context for Kubernetes CLI by downloading Kubernetes configuration files and setting KUBECONFIG environment variable.
-3. Run script `setup_blockchainNetwork.sh` to setup hyperledger fabric network.
+3. Run script to deploy hyperledger fabric network.
+4. Access Kubernetes dashboard.
 
 ## Included components
 
@@ -127,6 +128,7 @@ If there is any change in network topology, need to modify the configuration fil
 Once you have completed the changes in configuration files, you are ready to deploy your network. Execute the script to deploy your hyperledger fabric network.
 
 ```
+$ chmod +x setup_blockchainNetwork.sh
 $ ./setup_blockchainNetwork.sh
 ```
 
@@ -137,6 +139,7 @@ Note: Before running the script, please check your environment. You should able 
 If required, you can bring your hyperledger fabric network down using the script `deleteNetwork.sh`. This script will delete all your pods, jobs, deployments etc. from your Kubernetes cluster.
 
 ```
+$ chmod +x deleteNetwork.sh
 $ ./deleteNetwork.sh
 ```
 
