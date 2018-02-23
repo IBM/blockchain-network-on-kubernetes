@@ -25,3 +25,11 @@ Troubleshooting
   
   There is something wrong with the setup. You would like to do setup from a fresh.
   
+* For debugging purposes, if you want to inspect the logs of any container, then run the following command.
+
+  ```
+   $ kubectl get pods --show-all                  # Get the name of the pod
+   $ kubectl logs [pod name]                      # if pod has one container
+   $ kubectl logs [pod name] [container name]     # if pod has more than one container
+  ```
+
