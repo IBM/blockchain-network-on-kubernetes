@@ -68,7 +68,7 @@ Follow these steps to setup and run this code pattern.
 
 * Create a Kubernetes cluster with [IBM Cloud Container Service](https://console.bluemix.net/containers-kubernetes/catalog/cluster) using GUI. This pattern uses the _lite cluster_.
 
-  Note: It can take up to 15 minutes for the worker node machine to be ordered and for the cluster to be set up and provisioned.
+  Note: It can take up to 15 minutes for the cluster to be set up and provisioned.
 
 
 ### 2. Setting up CLIs
@@ -84,6 +84,12 @@ Follow these steps to setup and run this code pattern.
 
 ### 3. Gain access to your Kubernetes Cluster
   
+  Access the [IBM Cloud Dashboard](https://console.bluemix.net/dashboard/apps).  Choose the same cloud foundry org and cloud
+  foundry space where cluster is created.
+  
+  * Check the status of your cluster `IBM Cloud Dashboard -> <your cluster> -> Worker Nodes`. If status is not `ready`, then
+    you need to wait for some more time to proceed further.
+    
   * Once your cluster is ready, open the access tab `IBM Cloud Dashboard -> <your cluster> -> Access` as shown in snapshot.
   
     ![](images/gain-access-to-cluster.png)
@@ -107,15 +113,15 @@ This pattern provides a script which automatically provisions a sample Hyperledg
 #### Copy Kubernetes configuration scripts
 
 Clone or download the Kubernetes configuration scripts to your user home directory.
-```
-$ git clone https://github.com/IBM/blockchain-network-on-kubernetes.git
-```
+  ```
+  $ git clone https://github.com/IBM/blockchain-network-on-kubernetes.git
+  ```
 
 Navigate to the source directory
-```
-$ cd blockchain-network-on-kubernetes
-$ ls
-```
+  ```
+  $ cd blockchain-network-on-kubernetes
+  $ ls
+  ```
 In the source directory, 
   * `configFiles` contains Kubernetes configuration files
   * `artifacts` contains the network configuration files
@@ -129,10 +135,10 @@ If there is any change in network topology, need to modify the configuration fil
 
 Once you have completed the changes in configuration files, you are ready to deploy your network. Execute the script to deploy your hyperledger fabric network.
 
-```
-$ chmod +x setup_blockchainNetwork.sh
-$ ./setup_blockchainNetwork.sh
-```
+  ```
+  $ chmod +x setup_blockchainNetwork.sh
+  $ ./setup_blockchainNetwork.sh
+  ```
 
 Note: Before running the script, please check your environment. You should able to run `kubectl commands` properly with your cluster as explained in step 3. 
 
@@ -140,73 +146,81 @@ Note: Before running the script, please check your environment. You should able 
 
 If required, you can bring your hyperledger fabric network down using the script `deleteNetwork.sh`. This script will delete all your pods, jobs, deployments etc. from your Kubernetes cluster.
 
-```
-$ chmod +x deleteNetwork.sh
-$ ./deleteNetwork.sh
-```
+  ```
+  $ chmod +x deleteNetwork.sh
+  $ ./deleteNetwork.sh
+  ```
 
 ### 5. Test the deployed network
 
 After successful execution of the script `setup_blockchainNetwork.sh`, check the status of pods.
 
-```
-$ kubectl get pods
-NAME                                    READY     STATUS    RESTARTS   AGE
-blockchain-ca-7848c48d64-2cxr5          1/1       Running   0          4m
-blockchain-orderer-596ccc458f-thdgn     1/1       Running   0          4m
-blockchain-org1peer1-747d6bdff4-4kzts   1/1       Running   0          4m
-blockchain-org2peer1-7794d9b8c5-sn2qf   1/1       Running   0          4m
-blockchain-org3peer1-59b6d99c45-dhtbp   1/1       Running   0          4m
-blockchain-org4peer1-6b6c99c45-wz9wm    1/1       Running   0          4m
-```
+  ```
+  $ kubectl get pods
+  NAME                                    READY     STATUS    RESTARTS   AGE
+  blockchain-ca-7848c48d64-2cxr5          1/1       Running   0          4m
+  blockchain-orderer-596ccc458f-thdgn     1/1       Running   0          4m
+  blockchain-org1peer1-747d6bdff4-4kzts   1/1       Running   0          4m
+  blockchain-org2peer1-7794d9b8c5-sn2qf   1/1       Running   0          4m
+  blockchain-org3peer1-59b6d99c45-dhtbp   1/1       Running   0          4m
+  blockchain-org4peer1-6b6c99c45-wz9wm    1/1       Running   0          4m
+  ```
 
-As mentioned above, the script join all peers on one channel `channel1`, deploy and instantiate chaincode on all peers. It means we can execute an invoke/query command on any peer and the response should be same on all peers. Please note that in this pattern tls certs are disabled to avoid complexity. We are using CLI commands to test this network. Get into a bash shell of any peer using the following command.
+As mentioned above, the script join all peers on one channel `channel1`, deploy and instantiate chaincode on all peers. It means we can execute an invoke/query command on any peer and the response should be same on all peers. Please note that in this pattern tls certs are disabled to avoid complexity. In this patter, the CLI commands are used to test the network. For running a query against any peer, need to get into a bash shell of a peer, run the query and exit from the peer container.
 
-```
-$ kubectl exec -it blockchain-org1peer1-747d6bdff4-4kzts bash
-```
+Use the following command to get into a bash shell of a peer:
+
+  ```
+  $ kubectl exec -it blockchain-org1peer1-747d6bdff4-4kzts bash
+  ```
+
+And use the following command to exit from the peer container:
+
+  ```
+  # exit
+  ```
 
 **Query**
 
 Chaincode was instantiated with thevalues as `{ a: 100, b: 200 }`. Let’s query for the value of `a` to make sure the chaincode was properly instantiated.
 
-![](images/first-query.png)
+  ![](images/first-query.png)
 
 **Invoke**
 
 Now let’s move 20 from `a` to `b`. A new transaction will be generated and upon successful completion of transaction state will get updated.
 
-![](images/invoke.png)
+  ![](images/invoke.png)
 
 **Query**
 
 Let’s confirm that our previous invocation executed properly. We initialized the key `a` with a value of 100 and just removed 20 with our previous invocation. Therefore, a query against `a` should show 80 and a query against `b` should show 220.
 
-![](images/second-query.png)
+  ![](images/second-query.png)
 
-![](images/third-query.png)
+  ![](images/third-query.png)
 
 ### 6. View the Kubernetes Dashboard
 
 Obtain the token using the following command to authenticate for Kubernetes dashboard.
 
-```
-$ kubectl config view -o jsonpath='{.users[0].user.auth-provider.config.id-token}'
-```
+  ```
+  $ kubectl config view -o jsonpath='{.users[0].user.auth-provider.config.id-token}'
+  ```
 
 Copy the token. Launch your Kubernetes dashboard with the default port 8001.
 
-```
-$ kubectl proxy
-```
+  ```
+  $ kubectl proxy
+  ```
 
 Open the URL http://localhost:8001/ui in a web browser to see the Kubernetes dashboard. It will prompt for the authentication.
 
-![](images/provide-token-for-dashboard.png)
+  ![](images/provide-token-for-dashboard.png)
 
 Provide the token and `SIGN-IN`. In the Workloads tab, you can see the resources that was created through scripts.
 
-![](images/kubernetes-dashboard.png)
+  ![](images/kubernetes-dashboard.png)
 
 The hyperledger fabric network is ready to use. You can start developing your blockchain applications using node sdk or hyperledger composer for this network.
 
