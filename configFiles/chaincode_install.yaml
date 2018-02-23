@@ -4,7 +4,7 @@ kind: Job
 metadata:
   name: chaincodeinstall
 spec:
-  backoffLimit: 2
+  backoffLimit: 1
   template:
     metadata:
       name: chaincodeinstall
@@ -15,10 +15,10 @@ spec:
         persistentVolumeClaim:
           claimName: shared-pvc
       containers:
-      - name: chaincodeinstall
+      - name: chaincodeinstall1
         image: hyperledger/fabric-tools:x86_64-1.0.4
         imagePullPolicy: Always
-        command: ["sh", "-c", "echo $GOPATH; cp -r /shared/artifacts/chaincode/ $GOPATH/src/; ls $GOPATH/src; peer chaincode install -n ${CHAINCODE_NAME} -v ${CHAINCODE_VERSION} -p chaincode_example02/"]
+        command: ["sh", "-c", "echo $GOPATH; cp -r /shared/artifacts/chaincode $GOPATH/src/; ls $GOPATH/src; peer chaincode install -n ${CHAINCODE_NAME} -v ${CHAINCODE_VERSION} -p chaincode_example02/"]
         env:
         - name: CHAINCODE_NAME
           value: "cc"
@@ -37,10 +37,11 @@ spec:
         volumeMounts:
         - mountPath: /shared
           name: sharedvolume
-      - name: chaincodeinstall1
+
+      - name: chaincodeinstall2
         image: hyperledger/fabric-tools:x86_64-1.0.4
         imagePullPolicy: Always
-        command: ["sh", "-c", "echo $GOPATH; cp -r /shared/artifacts/chaincode/ $GOPATH/src/; ls $GOPATH/src; peer chaincode install -n ${CHAINCODE_NAME} -v ${CHAINCODE_VERSION} -p chaincode_example02/"]
+        command: ["sh", "-c", "echo $GOPATH; cp -r /shared/artifacts/chaincode $GOPATH/src/; ls $GOPATH/src; peer chaincode install -n ${CHAINCODE_NAME} -v ${CHAINCODE_VERSION} -p chaincode_example02/"]
         env:
         - name: CHAINCODE_NAME
           value: "cc"
@@ -54,6 +55,52 @@ spec:
           value: Org2MSP
         - name: CORE_PEER_ADDRESS
           value: blockchain-org2peer1:30210
+        - name: GODEBUG
+          value: "netdns=go"
+        volumeMounts:
+        - mountPath: /shared
+          name: sharedvolume
+
+      - name: chaincodeinstall3
+        image: hyperledger/fabric-tools:x86_64-1.0.4
+        imagePullPolicy: Always
+        command: ["sh", "-c", "echo $GOPATH; cp -r /shared/artifacts/chaincode $GOPATH/src/; ls $GOPATH/src; peer chaincode install -n ${CHAINCODE_NAME} -v ${CHAINCODE_VERSION} -p chaincode_example02/"]
+        env:
+        - name: CHAINCODE_NAME
+          value: "cc"
+        - name: CHAINCODE_VERSION
+          value: "1.0"
+        - name: FABRIC_CFG_PATH
+          value: /etc/hyperledger/fabric
+        - name: CORE_PEER_MSPCONFIGPATH
+          value: /shared/crypto-config/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp
+        - name: CORE_PEER_LOCALMSPID
+          value: Org3MSP
+        - name: CORE_PEER_ADDRESS
+          value: blockchain-org3peer1:30310
+        - name: GODEBUG
+          value: "netdns=go"
+        volumeMounts:
+        - mountPath: /shared
+          name: sharedvolume
+
+      - name: chaincodeinstall4
+        image: hyperledger/fabric-tools:x86_64-1.0.4
+        imagePullPolicy: Always
+        command: ["sh", "-c", "echo $GOPATH; cp -r /shared/artifacts/chaincode $GOPATH/src/; ls $GOPATH/src; peer chaincode install -n ${CHAINCODE_NAME} -v ${CHAINCODE_VERSION} -p chaincode_example02/"]
+        env:
+        - name: CHAINCODE_NAME
+          value: "cc"
+        - name: CHAINCODE_VERSION
+          value: "1.0"
+        - name: FABRIC_CFG_PATH
+          value: /etc/hyperledger/fabric
+        - name: CORE_PEER_MSPCONFIGPATH
+          value: /shared/crypto-config/peerOrganizations/org4.example.com/users/Admin@org4.example.com/msp
+        - name: CORE_PEER_LOCALMSPID
+          value: Org4MSP
+        - name: CORE_PEER_ADDRESS
+          value: blockchain-org4peer1:30410
         - name: GODEBUG
           value: "netdns=go"
         volumeMounts:

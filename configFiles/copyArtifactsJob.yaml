@@ -4,7 +4,7 @@ kind: Job
 metadata:
   name: copyartifacts
 spec:
-  backoffLimit: 5
+  backoffLimit: 1
   template:
     metadata:
       name: copyartifacts
@@ -21,7 +21,7 @@ spec:
       - name: copyartifacts
         image: hyperledger/fabric-tools:x86_64-1.0.4
         imagePullPolicy: Always
-        command: ["sh", "-c", "ls -l /shared; rm -rf /shared/*; ls -l /shared; while [ ! -d /shared/artifacts ]; do echo Waiting for artifacts to be copied; sleep 1; done; sleep 2; ls -l /shared/artifacts; "]
+        command: ["sh", "-c", "ls -l /shared; rm -rf /shared/*; ls -l /shared; while [ ! -d /shared/artifacts ]; do echo Waiting for artifacts to be copied; sleep 2; done; sleep 10; ls -l /shared/artifacts; "]
         volumeMounts:
         - mountPath: /shared
           name: sharedvolume
