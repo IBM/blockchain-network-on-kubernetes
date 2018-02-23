@@ -32,4 +32,23 @@ Troubleshooting
    $ kubectl logs [pod name]                      # if pod has one container
    $ kubectl logs [pod name] [container name]     # if pod has more than one container
   ```
+  
+* If you see something like this for chaincode instantiation,
 
+  ![](images/error4.png)
+  
+  It means chaincode has been instantiated already on the peer. Retrying of the same will fail with this error. You can ignore
+  this message and continue with your transactions (invoke/query).
+  
+* If you see error as shown below:
+
+  ```
+  Running: kubectl create -f /Users/shikhamaheshwari/Documents/Pattern-setupNetwork/configFiles/copyArtifactsJob.yaml
+  job "copyartifacts" created
+  error: unable to upgrade connection: container not found ("copyartifacts")
+  Waiting for 10 more seconds for copying artifacts to avoid any network delay
+  Waiting for copyartifacts job to complete
+  Waiting for copyartifacts job to complete
+  ```
+
+  It is intermittent issue and might occur becaue of network. Delete the network and retry afresh after sometime. 
