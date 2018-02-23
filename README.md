@@ -178,6 +178,7 @@ Now let’s move 20 from `a` to `b`. A new transaction will be generated and upo
 Let’s confirm that our previous invocation executed properly. We initialized the key `a` with a value of 100 and just removed 20 with our previous invocation. Therefore, a query against `a` should show 80 and a query against `b` should show 220.
 
 ![](images/second-query.png)
+
 ![](images/third-query.png)
 
 ### 6. View the Kubernetes Dashboard
