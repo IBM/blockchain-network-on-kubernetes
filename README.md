@@ -26,7 +26,7 @@ When the reader has completed this pattern, they will understand how to:
   ![](images/architecture.png)
 
 1. Log in to IBM Cloud CLI and initialize IBM Cloud Container Service plugin.
-2. Set context for Kubernetes cluster usin CLI and download Kubernetes configuration files. After downloading configuration files, set KUBECONFIG environment variable.
+2. Set context for Kubernetes cluster using CLI and download Kubernetes configuration files. After downloading configuration files, set KUBECONFIG environment variable.
 3. Run script to deploy your hyperledger fabric network on Kubernetes cluster.
 4. Access Kubernetes dashboard.
 
