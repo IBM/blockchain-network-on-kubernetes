@@ -1,12 +1,12 @@
 ## ** Work in Progress **
-# Set up of Blockchain network using Kubernetes Cluster on IBM Cloud
+# Deploy the Blockchain network using Kubernetes APIs on IBM Cloud
 
-Blockchain is a shared, immutable ledger for recording the history of transactions. Hyperledger Fabric is a blockchain framework implementation and one of the Hyperledger projects hosted by The Linux Foundation. For developing any blockchain (Hyperledger Fabric) application, you need to setup a Hyperledger Fabric network to develop, test and execute the application. Hyperledger Fabric network can be setup in multiple ways. 
-* Setup Hyperledger Fabric network locally (http://hyperledger-fabric.readthedocs.io/en/release/build_network.html)
+Blockchain is a shared, immutable ledger for recording the history of transactions. The Linux Foundation’s Hyperledger Fabric, the software implementation of blockchain IBM is committed to, is a permissioned network. For developing any blockchain use-case, the very first thing is to have a development environment for Hyperledger Fabric to create and deploy the application. Hyperledger Fabric network can be setup in multiple ways. 
+* Setup [Hyperledger Fabric network locally](http://hyperledger-fabric.readthedocs.io/en/release/build_network.html)
 * Use [Blockchain as a service](https://console.bluemix.net/catalog/services/blockchain) hosted on [IBM Cloud](https://console.bluemix.net/). IBM Cloud provides you Blockchain as a service with a membership paid plan. 
-* Setup Hyperledger Fabric network using [Kubernetes Cluster]((https://console.bluemix.net/containers-kubernetes/catalog/cluster)) on [IBM Cloud](https://console.bluemix.net/)
+* Setup Hyperledger Fabric network using [Kubernetes APIs]((https://console.bluemix.net/containers-kubernetes/catalog/cluster)) on [IBM Cloud](https://console.bluemix.net/)
 
-Hosting the Hyperledger Fabric network on IBM Cloud provides you additional benefits like multiple users can work on the same setup, the setup can be used for different blockchain applications, the setup can be reused and so on. This pattern demonstrates a way to setup your Hyperledger Fabric network using Kubernetes Cluster on IBM Cloud. Please note that the blockchain network setup on Kubernetes is good to use for demo scenarios, but for production you should use IBM Blockchain as a service hosted on IBM Cloud.
+This code pattern demonstrates the steps involved in setting up your business network on Hyperledger Fabric using Kubernetes APIs on IBM Cloud Container Service. Hosting the Hyperledger Fabric network on IBM Cloud provides you many benefits like multiple users can work on the same setup, the setup can be used for different blockchain applications, the setup can be reused and so on. Please note that the blockchain network setup on Kubernetes is good to use for demo scenarios but for production, it is recommended to use IBM Blockchain as a service hosted on IBM Cloud.
 
 #### Kubernetes Cluster
 
@@ -14,12 +14,12 @@ Hosting the Hyperledger Fabric network on IBM Cloud provides you additional bene
 
 To setup your cluster for maximum availability and capacity, IBM Cloud allows you to create a fully customizable, production-ready cluster called _standard cluster_. _Standard clusters_ allow highly available cluster configurations such as a setup with two clusters that run in different regions, each with multiple worker nodes. Please see https://console.bluemix.net/docs/containers/cs_planning.html#cs_planning_cluster_config to review other options for highly available cluster configurations.
 
-This pattern uses a _lite cluster_ provided by IBM Cloud and it can be used for proof-of-concept purpose. This pattern provides you the scripts to automate the process for setting up Hyperledger Fabric network using Kubernetes Cluster on IBM Cloud.
+This pattern uses a _lite cluster_ provided by IBM Cloud and it can be used for proof-of-concept purpose. This pattern provides you the scripts to automate the process for setting up Hyperledger Fabric network using Kubernetes APIs on IBM Cloud.
 
 When the reader has completed this pattern, they will understand how to:
 
 * modify configuration files according to their network topology
-* set up their own hyperledger fabric network on Kubernetes cluster
+* deploy the hyperledger fabric network on Kubernetes cluster
 
 ## Flow
 
@@ -129,11 +129,11 @@ In the source directory,
   
 #### Modify the Kubernetes configuration scripts
 
-If there is any change in network topology, need to modify the configuration files(.yaml files) appropriately. The configuration files are located in `artifacts` and `configFiles` directory. For example, if you decide to increase/decrease the capacity of persistant volume then you need to modify `createVolume.yaml` only.  
+If there is any change in network topology, need to modify the configuration files(.yaml files) appropriately. The configuration files are located in `artifacts` and `configFiles` directory. For example, if you decide to increase/decrease the capacity of persistant volume then you need to modify `createVolume.yaml`.  
 
 #### Run the script to deploy your Hyperledger Fabric Network
 
-Once you have completed the changes in configuration files, you are ready to deploy your network. Execute the script to deploy your hyperledger fabric network.
+Once you have completed the changes(if any) in configuration files, you are ready to deploy your network. Execute the script to deploy your hyperledger fabric network.
 
   ```
   $ chmod +x setup_blockchainNetwork.sh
