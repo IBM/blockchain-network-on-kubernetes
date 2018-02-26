@@ -388,7 +388,7 @@ spec:
         - name: CORE_PEER_ADDRESSAUTODETECT
           value: "true"
         - name: CORE_PEER_ID
-          value: org2peer1
+          value: org4peer1
         - name: CORE_PEER_NETWORKID
           value: nid1
         - name: CORE_PEER_ADDRESS
