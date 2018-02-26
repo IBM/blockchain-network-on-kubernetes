@@ -42,13 +42,6 @@ Troubleshooting
   
 * If you see error as shown below:
 
-  ```
-  Running: kubectl create -f /Users/shikhamaheshwari/Documents/Pattern-setupNetwork/configFiles/copyArtifactsJob.yaml
-  job "copyartifacts" created
-  error: unable to upgrade connection: container not found ("copyartifacts")
-  Waiting for 10 more seconds for copying artifacts to avoid any network delay
-  Waiting for copyartifacts job to complete
-  Waiting for copyartifacts job to complete
-  ```
+  ![](images/error5.png)
 
   It is intermittent issue and might occur becaue of network. Delete the network and retry afresh after sometime. 
