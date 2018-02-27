@@ -7,8 +7,8 @@ else
     exit
 fi
 
-# KUBECONFIG_FOLDER=${PWD}
 
+# Creating Persistant Volume
 echo -e "\nCreating volume"
 if [ "$(kubectl get pvc | grep shared-pvc | awk '{print $2}')" != "Bound" ]; then
     echo "The Persistant Volume does not seem to exist or is not bound"
@@ -26,6 +26,7 @@ else
     echo "The Persistant Volume exists, not creating again"
 fi
 
+# Copy the required files(configtx.yaml, cruypto-config.yaml, sample chaincode etc.) into volume
 echo -e "\nCopying artifacts into persistant volume"
 echo "Running: kubectl create -f ${KUBECONFIG_FOLDER}/copyArtifactsJob.yaml"
 kubectl create -f ${KUBECONFIG_FOLDER}/copyArtifactsJob.yaml
@@ -50,6 +51,7 @@ done
 echo "Copy artifacts job completed"
 
 
+# Generate Network artifacts using configtx.yaml and crypto-config.yaml
 echo -e "\nGenerating the required artifacts for Blockchain network"
 echo "Running: kubectl create -f ${KUBECONFIG_FOLDER}/generateArtifactsJob.yaml"
 kubectl create -f ${KUBECONFIG_FOLDER}/generateArtifactsJob.yaml
@@ -69,11 +71,13 @@ while [ "${JOBSTATUS}" != "1" ]; do
 done
 
 
+# Create services for all peers, ca, orderer
 echo -e "\nCreating Services for blockchain network"
 echo "Running: kubectl create -f ${KUBECONFIG_FOLDER}/blockchain-services.yaml"
 kubectl create -f ${KUBECONFIG_FOLDER}/blockchain-services.yaml
 
 
+# Create peers, ca, orderer using Kubernetes Deployments
 echo -e "\nCreating new Deployment to create four peers in network"
 echo "Running: kubectl create -f ${KUBECONFIG_FOLDER}/peersDeployment.yaml"
 kubectl create -f ${KUBECONFIG_FOLDER}/peersDeployment.yaml
@@ -90,6 +94,8 @@ done
 echo "Waiting for 15 seconds for peers and orderer to settle"
 sleep 15
 
+
+# Generate channel artifacts using configtx.yaml and then create channel
 echo -e "\nCreating channel transaction artifact and a channel"
 echo "Running: kubectl create -f ${KUBECONFIG_FOLDER}/create_channel.yaml"
 kubectl create -f ${KUBECONFIG_FOLDER}/create_channel.yaml
@@ -107,6 +113,7 @@ done
 echo "Create Channel Completed Successfully"
 
 
+# Join all peers on a channel
 echo -e "\nCreating joinchannel job"
 echo "Running: kubectl create -f ${KUBECONFIG_FOLDER}/join_channel.yaml"
 kubectl create -f ${KUBECONFIG_FOLDER}/join_channel.yaml
@@ -124,6 +131,7 @@ done
 echo "Join Channel Completed Successfully"
 
 
+# Install chaincode on each peer
 echo -e "\nCreating installchaincode job"
 echo "Running: kubectl create -f ${KUBECONFIG_FOLDER}/chaincode_install.yaml"
 kubectl create -f ${KUBECONFIG_FOLDER}/chaincode_install.yaml
@@ -141,6 +149,7 @@ done
 echo "Chaincode Install Completed Successfully"
 
 
+# Instantiate chaincode on channel
 echo -e "\nCreating chaincodeinstantiate job"
 echo "Running: kubectl create -f ${KUBECONFIG_FOLDER}/chaincode_instantiate.yaml"
 kubectl create -f ${KUBECONFIG_FOLDER}/chaincode_instantiate.yaml
@@ -156,5 +165,6 @@ while [ "${JOBSTATUS}" != "1" ]; do
     JOBSTATUS=$(kubectl get jobs |grep chaincodeinstantiate |awk '{print $3}')
 done
 echo "Chaincode Instantiation Completed Successfully"
+
 sleep 15
 echo -e "\nNetwork Setup Completed !!"
