@@ -186,19 +186,19 @@ And the command to be used to exit from the peer container is:
 
 **Query**
 
-Chaincode was instantiated with the values as `{ a: 100, b: 200 }`. Let’s query for the value of `a` to make sure the chaincode was properly instantiated.
+Chaincode was instantiated with the values as `{ a: 100, b: 200 }`. Let’s query to `or1peer1` for the value of `a` to make sure the chaincode was properly instantiated.
 
   ![](images/first-query.png)
 
 **Invoke**
 
-Now let’s move 20 from `a` to `b`. A new transaction will be generated and upon successful completion of transaction state will get updated.
+Now let’s submit a request to `org2peer1` to move 20 from `a` to `b`. A new transaction will be generated and upon successful completion of transaction, state will get updated.
 
   ![](images/invoke.png)
 
 **Query**
 
-Let’s confirm that our previous invocation executed properly. We initialized the key `a` with a value of 100 and just removed 20 with our previous invocation. Therefore, a query against `a` should show 80 and a query against `b` should show 220.
+Let’s confirm that our previous invocation executed properly. We initialized the key `a` with a value of 100 and just removed 20 with our previous invocation. Therefore, a query against `a` should show 80 and a query against `b` should show 220. Now issue the query request to `org3peer1` and `org4peer1` as shown.
 
   ![](images/second-query.png)
 
