@@ -44,7 +44,7 @@ When the reader has completed this pattern, they will understand how to:
 
 ## Watch the Video
 
-TODO
+[![](http://img.youtube.com/vi/DFYk6XaMHc0/0.jpg)](https://youtu.be/DFYk6XaMHc0)
 
 ## Kubernetes Concepts Used
 * [Kubernetes Pods](https://kubernetes.io/docs/concepts/workloads/pods/pod/) - Pods represent the smallest deployable units in a Kubernetes cluster and are used to group containers that must be treated as a single unit.
@@ -112,7 +112,7 @@ Follow these steps to setup and run this code pattern.
 
 #### Understand the network topology
 
-This pattern provides a script which automatically provisions a sample Hyperledger Fabric network consisting of four organizations, each maintaining one peer node, and a 'solo' ordering service. Also, the script creates a channel named as `channel1`, joins all peers to the channel `channel1`, deploy and instantiate chaincode on all peers. The pattern will also help to drive execution of transactions against the deployed chaincode.
+This pattern provides a script which automatically provisions a sample Hyperledger Fabric network consisting of four organizations, each maintaining one peer node, and a 'solo' ordering service. Also, the script creates a channel named as `channel1`, joins all peers to the channel `channel1`, install chaincode on all peers and instantiate chaincode on channel. The pattern also helps to drive execution of transactions against the deployed chaincode.
 
 #### Copy Kubernetes configuration scripts
 
@@ -129,7 +129,7 @@ Navigate to the source directory
 In the source directory, 
   * `configFiles` contains Kubernetes configuration files
   * `artifacts` contains the network configuration files
-  * scripts to deploy and delete the network
+  * `*.sh` scripts to deploy and delete the network
   
 #### Modify the Kubernetes configuration scripts
 
@@ -170,7 +170,7 @@ After successful execution of the script `setup_blockchainNetwork.sh`, check the
   blockchain-org4peer1-6b6c99c45-wz9wm    1/1       Running   0          4m
   ```
 
-As mentioned above, the script join all peers on one channel `channel1`, deploy and instantiate chaincode on all peers. It means we can execute an invoke/query command on any peer and the response should be same on all peers. Please note that in this pattern tls certs are disabled to avoid complexity. In this patter, the CLI commands are used to test the network. For running a query against any peer, need to get into a bash shell of a peer, run the query and exit from the peer container.
+As mentioned above, the script joins all peers on one channel `channel1`, install chaincode on all peers and instantiate chaincode on channel. It means we can execute an invoke/query command on any peer and the response should be same on all peers. Please note that in this pattern tls certs are disabled to avoid complexity. In this pattern, the CLI commands are used to test the network. For running a query against any peer, need to get into a bash shell of a peer, run the query and exit from the peer container.
 
 Use the following command to get into a bash shell of a peer:
 
@@ -178,7 +178,7 @@ Use the following command to get into a bash shell of a peer:
   $ kubectl exec -it blockchain-org1peer1-747d6bdff4-4kzts bash
   ```
 
-And use the following command to exit from the peer container:
+And the command to be used to exit from the peer container is:
 
   ```
   # exit
@@ -186,7 +186,7 @@ And use the following command to exit from the peer container:
 
 **Query**
 
-Chaincode was instantiated with thevalues as `{ a: 100, b: 200 }`. Let’s query for the value of `a` to make sure the chaincode was properly instantiated.
+Chaincode was instantiated with the values as `{ a: 100, b: 200 }`. Let’s query for the value of `a` to make sure the chaincode was properly instantiated.
 
   ![](images/first-query.png)
 
@@ -226,7 +226,7 @@ Provide the token and `SIGN-IN`. In the Workloads tab, you can see the resources
 
   ![](images/kubernetes-dashboard.png)
 
-The hyperledger fabric network is ready to use. You can start developing your blockchain applications using node sdk or hyperledger composer for this network.
+The hyperledger fabric network is ready to use. You can start developing your blockchain applications using node sdk or hyperledger composer for this deployed network.
 
 ## Troubleshooting
 
