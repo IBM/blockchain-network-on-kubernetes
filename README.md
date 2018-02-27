@@ -186,7 +186,7 @@ And the command to be used to exit from the peer container is:
 
 **Query**
 
-Chaincode was instantiated with the values as `{ a: 100, b: 200 }`. Let’s query to `or1peer1` for the value of `a` to make sure the chaincode was properly instantiated.
+Chaincode was instantiated with the values as `{ a: 100, b: 200 }`. Let’s query to `org1peer1` for the value of `a` to make sure the chaincode was properly instantiated.
 
   ![](images/first-query.png)
 
