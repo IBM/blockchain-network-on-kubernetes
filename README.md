@@ -2,11 +2,13 @@
 # Deploy the Blockchain network using Kubernetes APIs on IBM Cloud
 
 Blockchain is a shared, immutable ledger for recording the history of transactions. The Linux Foundation’s Hyperledger Fabric, the software implementation of blockchain IBM is committed to, is a permissioned network. For developing any blockchain use-case, the very first thing is to have a development environment for Hyperledger Fabric to create and deploy the application. Hyperledger Fabric network can be setup in multiple ways. 
-* Setup [Hyperledger Fabric network locally](http://hyperledger-fabric.readthedocs.io/en/release/build_network.html)
-* Use [Blockchain as a service](https://console.bluemix.net/catalog/services/blockchain) hosted on [IBM Cloud](https://console.bluemix.net/). IBM Cloud provides you Blockchain as a service with a membership paid plan. 
-* Setup Hyperledger Fabric network using [Kubernetes APIs]((https://console.bluemix.net/containers-kubernetes/catalog/cluster)) on [IBM Cloud](https://console.bluemix.net/)
+* [Hyperledger Fabric network On-Premise](http://hyperledger-fabric.readthedocs.io/en/release-1.0/build_network.html)
+* Using [Blockchain as a service](https://console.bluemix.net/catalog/services/blockchain) hosted on [IBM Cloud](https://console.bluemix.net/). IBM Cloud provides you Blockchain as a service with a Starter Membership Plan and Enterprise Membership Plan.
+* Hyperledger Fabric network using [Kubernetes APIs]((https://console.bluemix.net/containers-kubernetes/catalog/cluster)) on [IBM Cloud Container Service](https://console.bluemix.net/containers-kubernetes/catalog/cluster)
 
-This code pattern demonstrates the steps involved in setting up your business network on Hyperledger Fabric using Kubernetes APIs on IBM Cloud Container Service. Hosting the Hyperledger Fabric network on IBM Cloud provides you many benefits like multiple users can work on the same setup, the setup can be used for different blockchain applications, the setup can be reused and so on. Please note that the blockchain network setup on Kubernetes is good to use for demo scenarios but for production, it is recommended to use IBM Blockchain as a service hosted on IBM Cloud.
+This code pattern demonstrates the steps involved in setting up your business network on **Hyperledger Fabric using Kubernetes APIs on IBM Cloud Container Service**. 
+
+Hosting the Hyperledger Fabric network on IBM Cloud provides you many benefits like multiple users can work on the same setup, the setup can be used for different blockchain applications, the setup can be reused and so on. Please note that the blockchain network setup on Kubernetes is good to use for demo scenarios but for production, it is recommended to use IBM Blockchain as a service hosted on IBM Cloud.
 
 #### Kubernetes Cluster
 
@@ -175,7 +177,7 @@ As mentioned above, the script joins all peers on one channel `channel1`, instal
 Use the following command to get into a bash shell of a peer:
 
   ```
-  $ kubectl exec -it blockchain-org1peer1-747d6bdff4-4kzts bash
+  $ kubectl exec -it <blockchain-org1peer1 pod name> bash
   ```
 
 And the command to be used to exit from the peer container is:
