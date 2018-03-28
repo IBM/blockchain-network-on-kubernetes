@@ -2,7 +2,7 @@
 # Deploy the Blockchain network using Kubernetes APIs on IBM Cloud
 
 Blockchain is a shared, immutable ledger for recording the history of transactions. The Linux Foundation’s Hyperledger Fabric, the software implementation of blockchain IBM is committed to, is a permissioned network. For developing any blockchain use-case, the very first thing is to have a development environment for Hyperledger Fabric to create and deploy the application. Hyperledger Fabric network can be setup in multiple ways. 
-* [Hyperledger Fabric network](http://hyperledger-fabric.readthedocs.io/en/release-1.0/build_network.html) using docker-compose
+* Hyperledger Fabric network [using docker-compose](http://hyperledger-fabric.readthedocs.io/en/release-1.0/build_network.html)
 * Using [Blockchain as a service](https://console.bluemix.net/catalog/services/blockchain) hosted on [IBM Cloud](https://console.bluemix.net/). IBM Cloud provides you Blockchain as a service with a Starter Membership Plan and Enterprise Membership Plan.
 * Hyperledger Fabric network using [Kubernetes APIs]((https://console.bluemix.net/containers-kubernetes/catalog/cluster)) on [IBM Cloud Container Service](https://console.bluemix.net/containers-kubernetes/catalog/cluster)
 
