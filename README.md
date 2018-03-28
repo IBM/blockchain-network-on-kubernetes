@@ -135,11 +135,11 @@ In the source directory,
   
 #### Modify the Kubernetes configuration scripts
 
-If there is any change in network topology, need to modify the configuration files(.yaml files) appropriately. The configuration files are located in `artifacts` and `configFiles` directory. For example, if you decide to increase/decrease the capacity of persistant volume then you need to modify `createVolume.yaml`.  
+If there is any change in network topology, need to modify the configuration files (.yaml files) appropriately. The configuration files are located in `artifacts` and `configFiles` directory. For example, if you decide to increase/decrease the capacity of persistant volume then you need to modify `createVolume.yaml`.  
 
 #### Run the script to deploy your Hyperledger Fabric Network
 
-Once you have completed the changes(if any) in configuration files, you are ready to deploy your network. Execute the script to deploy your hyperledger fabric network.
+Once you have completed the changes (if any) in configuration files, you are ready to deploy your network. Execute the script to deploy your hyperledger fabric network.
 
   ```
   $ chmod +x setup_blockchainNetwork.sh
