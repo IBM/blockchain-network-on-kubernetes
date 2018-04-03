@@ -13,10 +13,18 @@ echo -e "\nCreating volume"
 if [ "$(kubectl get pvc | grep shared-pvc | awk '{print $2}')" != "Bound" ]; then
     echo "The Persistant Volume does not seem to exist or is not bound"
     echo "Creating Persistant Volume"
-        
-    echo "Running: kubectl create -f ${KUBECONFIG_FOLDER}/createVolume.yaml"
-    kubectl create -f ${KUBECONFIG_FOLDER}/createVolume.yaml
-    sleep 5
+
+    if [ "$1" == "--paid" ]; then
+        echo "You passed argument --paid. Make sure you have an IBM Cloud Kubernetes - Standard tier. Else, remove --paid option"
+        echo "Running: kubectl create -f ${KUBECONFIG_FOLDER}/createVolume-paid.yaml"
+        kubectl create -f ${KUBECONFIG_FOLDER}/createVolume-paid.yaml
+        sleep 5
+    else
+        echo "Running: kubectl create -f ${KUBECONFIG_FOLDER}/createVolume.yaml"
+        kubectl create -f ${KUBECONFIG_FOLDER}/createVolume.yaml
+        sleep 5
+    fi
+
     if [ "kubectl get pvc | grep shared-pvc | awk '{print $3}'" != "shared-pv" ]; then
         echo "Success creating Persistant Volume"
     else
@@ -27,12 +35,27 @@ else
 fi
 
 # Copy the required files(configtx.yaml, cruypto-config.yaml, sample chaincode etc.) into volume
-echo -e "\nCopying artifacts into persistant volume"
+echo -e "\nCreating Copy artifacts job."
 echo "Running: kubectl create -f ${KUBECONFIG_FOLDER}/copyArtifactsJob.yaml"
 kubectl create -f ${KUBECONFIG_FOLDER}/copyArtifactsJob.yaml
 
-sleep 5
 pod=$(kubectl get pods  --show-all --selector=job-name=copyartifacts --output=jsonpath={.items..metadata.name})
+
+podSTATUS=$(kubectl get pods  --show-all --selector=job-name=copyartifacts --output=jsonpath={.items..phase})
+
+while [ "${podSTATUS}" != "Running" ]; do
+    echo "Wating for container of copy artifact pod to run. Current status of ${pod} is ${podSTATUS}"
+    sleep 5;
+    if [ "${podSTATUS}" == "Error" ]; then
+        echo "There is an error in copyartifacts job. Please check logs."
+        exit 1
+    fi
+    podSTATUS=$(kubectl get pods --show-all --selector=job-name=copyartifacts --output=jsonpath={.items..phase})
+done
+
+echo -e "${pod} is now ${podSTATUS}"
+echo -e "\nStarting to copy artifacts in persistent volume."
+
 #fix for this script to work on icp and ICS
 kubectl cp ./artifacts $pod:/shared/
 
