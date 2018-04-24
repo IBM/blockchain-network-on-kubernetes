@@ -1,0 +1,14 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  annotations:
+    volume.beta.kubernetes.io/storage-class: "ibmc-file-bronze"
+  name: shared-pvc
+  labels:
+    app: blockchain
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 4Gi

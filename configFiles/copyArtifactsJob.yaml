@@ -19,7 +19,7 @@ spec:
           path: /var/run/docker.sock
       containers:
       - name: copyartifacts
-        image: hyperledger/fabric-tools:x86_64-1.0.4
+        image: alpine:3.7
         imagePullPolicy: Always
         command: ["sh", "-c", "ls -l /shared; rm -rf /shared/*; ls -l /shared; while [ ! -d /shared/artifacts ]; do echo Waiting for artifacts to be copied; sleep 2; done; sleep 10; ls -l /shared/artifacts; "]
         volumeMounts:
