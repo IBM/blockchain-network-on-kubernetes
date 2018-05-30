@@ -72,27 +72,25 @@ IBM 클라우드는 클러스터의 최대 가용성과 기능성을 이끌어�
 
   ![](images/create-service.png)
   
-  Note: It can take up to 15 minutes for the cluster to be set up and provisioned.
+  주의: 클러스터를 설정하고 준비하는 데까지 최대 15분이 걸릴 수 있습니다.
 
 
 ### 2. CLI 설치
 
-* Install [IBM 클라우드 CLI](https://console.bluemix.net/docs/cli/reference/bluemix_cli/get_started.html#getting-started). The prefix for running commands by using the Bluemix CLI is `bx`.
+* [IBM 클라우드 CLI](https://console.bluemix.net/docs/cli/reference/bluemix_cli/get_started.html#getting-started)를 설치하세요. Bluemix CLI를 사용하여 명령을 실행하기 위한 접두사는`bx '입니다.
 
-* Install [Kubernetes CLI](https://kubernetes.io/docs/tasks/tools/install-kubectl/). The prefix for running commands by using the Kubernetes CLI is `kubectl`.
+* [Kubernetes CLI](https://kubernetes.io/docs/tasks/tools/install-kubectl/)를 설치하세요. Kubernetes CLI를 사용하여 명령을 실행하기 위한 접두어는`kubectl '입니다.
 
-* Install the container service plugin using the following command.
+* 다음 명령을 실행하여 컨테이너 서비스 플러그인을 설치하세요.
   ```
   bx plugin install container-service -r Bluemix
   ```
 
 ### 3. Kubernetes 클러스터에 접근 권한 얻기
   
-  Access the [IBM 클라우드 Dashboard](https://console.bluemix.net/dashboard/apps).  Choose the same cloud foundry org and cloud
-  foundry space where cluster is created.
+  [IBM 클라우드 대시보드](https://console.bluemix.net/dashboard/apps)에서 클러스터가 생성 된 동일한 클라우드 파운드리 조직 및 클라우드 파운드리 공간을 선택하세요.
   
-  * Check the status of your cluster `IBM 클라우드 Dashboard -> <your cluster> -> Worker Nodes`. If status is not `ready`, then
-    you need to wait for some more time to proceed further.
+  * 클러스터의 상태를 확인합니다. `IBM 클라우드 대시보드 -> <생선된 클러스터> -> 작업 노드`. 만약 상태가 `ready`가 아니라면 계속 기다립니다.
     
     ![](images/cluster-status.png)
     
