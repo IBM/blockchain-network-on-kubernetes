@@ -66,7 +66,7 @@ IBM 클라우드는 클러스터의 최대 가용성과 기능성을 이끌어�
 5. [배포된 네트워크 테스트](#5-배포된-네트워크-테스트)
 6. [Kubernetes 대시보드 확인](#6-Kubernetes-대시보드-확인)
 
-### 1. IBM 클라우드에 Kubernetes 클러스터 생성
+## 1. IBM 클라우드에 Kubernetes 클러스터 생성
 
 * [IBM 클라우드 컨테이너 서비스](https://console.bluemix.net/containers-kubernetes/catalog/cluster) GUI를 사용하여 Kubernetes 클러스터를 생성합니다. 이 패턴에서는 _free cluster_ 을 사용합니다.
 
