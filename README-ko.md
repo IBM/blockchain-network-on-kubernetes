@@ -68,8 +68,6 @@ IBM 클라우드는 클러스터의 최대 가용성과 기능성을 이끌어�
 
 ### 1. IBM 클라우드에 Kubernetes 클러스터 생성
 
-* Create a Kubernetes cluster with [IBM 클라우드 컨테이너 서비스](https://console.bluemix.net/containers-kubernetes/catalog/cluster) using GUI. This pattern uses the _free cluster_.
-
 * [IBM 클라우드 컨테이너 서비스](https://console.bluemix.net/containers-kubernetes/catalog/cluster) GUI를 사용하여 Kubernetes 클러스터를 생성합니다. 이 패턴에서는 _free cluster_ 을 사용합니다.
 
   ![](images/create-service.png)
