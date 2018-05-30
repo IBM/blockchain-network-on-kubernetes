@@ -16,12 +16,13 @@ Hyperledger Fabric 네트워크를 IBM Cloud에서 호스팅 하면 여러 사�
 
 IBM 클라우드는 클러스터의 최대 가용성과 기능성을 이끌어내기 위해 즉시 상업용으로 사용 가능하며 완벽한 커스터마이징을 지원하는 _Standard Cluster_를 제공합니다. _Standard Cluster_는 서로 다른 영역에서 실행되는 다중 작업노드를 포함한 클러스터 구성과 같은 고가용성 클러스터 설정이 가능합니다. 고가용성 클러스터 구성에 대한 다른 옵션을 검토하려면 https://console.bluemix.net/docs/containers/cs_planning.html#cs_planning_cluster_config를 참조하십시오.
 
-This pattern uses a _free cluster_ provided by IBM Cloud and it can be used for proof-of-concept purpose. This pattern provides you the scripts to automate the process for setting up Hyperledger Fabric network using Kubernetes APIs on IBM Cloud.
+이 패턴은 IBM Cloud에서 제공하는 _free cluster_를 사용하며, 개념증명(proof-of-concept) 용도로 활용할 수 있습니다. 또한, IBM Cloud의 Kubernetes API를 사용하여 Hyperledger Fabric 네트워크를 설정하는 프로세스를 자동화하는 스크립트를 제공합니다.
 
-When the reader has completed this pattern, they will understand how to:
 
-* modify configuration files according to their network topology
-* deploy the hyperledger fabric network on Kubernetes cluster
+독자는 이 패턴을 완료하고 다음을 이해하게 될 것입니다:
+
+* 네트워크 토폴로지에 따른 설정 파일 수정하기
+* Kubernetes 클러스터에 Hyperledger Fabric 네트워크 배포하기
 
 ## Flow
 
