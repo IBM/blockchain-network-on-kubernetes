@@ -90,7 +90,7 @@ IBM 클라우드는 클러스터의 최대 가용성과 기능성을 이끌어�
   
   [IBM 클라우드 대시보드](https://console.bluemix.net/dashboard/apps)에서 클러스터가 생성 된 동일한 클라우드 파운드리 조직 및 클라우드 파운드리 공간을 선택하세요.
   
-  * 클러스터의 상태를 확인합니다. `IBM Cloud Dashboard -> <your cluster> -> Worker Nodes`. 만약 상태가 `ready`가 아니라면 계속 기다립니다.
+  * 클러스터의 상태를 확인합니다. `IBM Cloud Dashboard -> <your cluster> -> Worker Nodes` 상태가 `ready`로 바뀔 때까지 계속 기다립니다.
     
     ![](images/cluster-status.png)
     
@@ -98,7 +98,7 @@ IBM 클라우드는 클러스터의 최대 가용성과 기능성을 이끌어�
   
     ![](images/gain-access-to-cluster.png)
   
-  * `Gain access to your cluster` 섹션에 제공된 가이드를 따라 순서를 진행합니다.
+  * `Gain access to your cluster`에 제공된 가이드를 따라 순서를 진행합니다.
 
   * Kubernetes CLI 서버 버전을 확인하여 kubectl 명령이 클러스터에서 제대로 실행되는지 확인합니다.
   
@@ -110,18 +110,18 @@ IBM 클라우드는 클러스터의 최대 가용성과 기능성을 이끌어�
     
 ### 4. Kubernetes 클러스터에 Hyperledger Fabric 네터워크 배포
 
-#### 네트워크 토폴로지 이해하기
+#### 네트워크 토폴로지를 이해하세요
 
-This pattern provides a script which automatically provisions a sample Hyperledger Fabric network consisting of four organizations, each maintaining one peer node, and a 'solo' ordering service. Also, the script creates a channel named as `channel1`, joins all peers to the channel `channel1`, install chaincode on all peers and instantiate chaincode on channel. The pattern also helps to drive execution of transactions against the deployed chaincode.
+이 패턴은 각 1 개의 피어와 '솔로' 주문 서비스로 구성된, 총 4 개의 조직을 포함한 Hyperledger Fabric 네트워크 샘플을 자동으로 준비하는 스크립트를 제공합니다. 스크립트는 또한 `channel1`이란 이름의 채널을 생성하고 모든 피어를 이 채널로 연결합니다. 그다음, 체인코드를 모든 피어에게 설치하여 채널에 인스턴스화합니다. 이 패턴은 배포된 체인코드에 대해 트랜잭션 실행이 이루어지도록 도움을 줍니다.
 
-#### Copy Kubernetes configuration scripts
+#### Kubernetes 설정 스크립트 복사하세요
 
-Clone or download the Kubernetes configuration scripts to your user home directory.
+Kubernetes 설정 스크립트를 사용자의 홈 디렉토리에 복사 또는 다운로드합니다.
   ```
   $ git clone https://github.com/IBM/blockchain-network-on-kubernetes.git
   ```
 
-Navigate to the source directory
+소스 디렉토리로 이동합니다.
   ```
   $ cd blockchain-network-on-kubernetes
   $ ls
