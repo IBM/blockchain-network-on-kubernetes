@@ -1,22 +1,22 @@
 
-# Kubernetes API를 사용하여 IBM Cloud에 블록체인 네트워크 배포하기
+# Kubernetes API를 사용하여 IBM 클라우드에 블록체인 네트워크 배포하기
 
 블록 체인은 거래내역을 기록하기 위한 공유 불변의 원장입니다. Linux 재단의 Hyperledger Fabric은 IBM이 구현한 Permissioned 네트워크입니다. 블록체인의 활용 예제를 개발할 때 가장 먼저해야 할 일은 Hyperledger Fabric의 응용 프로그램 개발 및 배포 환경을 갖추는 것입니다. Hyperledger Fabric 네트워크를 구성하는 방법은 여러 가지가 있습니다.
 * [Hyperledger Fabric network On-Premise](http://hyperledger-fabric.readthedocs.io/en/release-1.0/build_network.html)
 * [IBM 클라우드](https://console.bluemix.net/)의 [블록체인 서비스](https://console.bluemix.net/catalog/services/blockchain). IBM 클라우드는 스타터 및 엔터프라이즈 멤버십 플랜 블록체인 서비스를 제공합니다.
 * [IBM 클라우드 컨테이너 서비스](https://console.bluemix.net/containers-kubernetes/catalog/cluster)에서 제공하는 [Kubernetes API](https://console.bluemix.net/containers-kubernetes/catalog/cluster)를 사용한 Hyperledger Fabric 네트워크
 
-이번 코드 패턴은 **IBM Cloud Container Service의 Kubernetes API를 활용한 Hyperledger Fabric**에서 비즈니스 네트워크를 설정하는 순서에 대한 것입니다.
+이번 코드 패턴은 **IBM 클라우드 컨테이너 서비스의 Kubernetes API를 활용한 Hyperledger Fabric**에서 비즈니스 네트워크를 설정하는 순서에 대한 것입니다.
 
-Hyperledger Fabric 네트워크를 IBM Cloud에서 호스팅 하면 여러 사용자가 같은 환경에서 작업이 가능하고, 환경을 다른 블록체인 애플리케이션에 재 사용하는 등 다양한 이점이 있습니다. Kubernetes의 블록체인 네트워크 설정은 데모 시나리오 목적으로는 충분하지만, 상업용으로서는 IBM 클라우드에서 호스팅 하는 블록체인 서비스를 추천합니다. 데모 시나리오에서는 Kubernetes의 블록체인 네트워크 설정을 사용하는 것이 좋지만 프로덕션 환경에서는 IBM Cloud에서 호스팅되는 서비스로 IBM Blockchain을 사용하는 것이 좋습니다.
+Hyperledger Fabric 네트워크를 IBM 클라우드에서 호스팅 하면 여러 사용자가 같은 환경에서 작업이 가능하고, 환경을 다른 블록체인 애플리케이션에 재 사용하는 등 다양한 이점이 있습니다. Kubernetes의 블록체인 네트워크 설정은 데모 시나리오 목적으로는 충분하지만, 상업용으로서는 IBM 클라우드에서 호스팅 하는 블록체인 서비스를 추천합니다.
 
 #### Kubernetes 클러스터
 
-[IBM Cloud Container Service](https://console.bluemix.net/containers-kubernetes/catalog/cluster)는 Kubernetes 기능을 익히고 테스트할 수 있도록 2 개의 CPU, 4GB 메모리 및 1 개의 worker 노드로 이루어진 무료 클러스터 구성을 제공합니다. 그러나 NFS처럼 볼륨 기반의 파일 저장소 기능은 제공하지 않습니다.
+[IBM 클라우드 컨테이너 서비스](https://console.bluemix.net/containers-kubernetes/catalog/cluster)는 Kubernetes 기능을 익히고 테스트할 수 있도록 2 개의 CPU, 4GB 메모리 및 1 개의 worker 노드로 이루어진 무료 클러스터 구성을 제공합니다. 그러나 NFS처럼 볼륨 기반의 파일 저장소 기능은 제공하지 않습니다.
 
 IBM 클라우드는 클러스터의 최대 가용성과 기능성을 이끌어내기 위해 즉시 상업용으로 사용 가능하며 완벽한 커스터마이징을 지원하는 _Standard Cluster_ 를 제공합니다. _Standard Cluster_ 는 서로 다른 영역에서 실행되는 다중 작업노드를 포함한 클러스터 구성과 같은 고가용성 클러스터 설정이 가능합니다. 고가용성 클러스터 구성에 대한 다른 옵션을 검토하려면 https://console.bluemix.net/docs/containers/cs_planning.html#cs_planning_cluster_config를 참조하십시오.
 
-이 패턴은 IBM Cloud에서 제공하는 _free cluster_ 를 사용하며, 개념증명(proof-of-concept) 용도로 활용할 수 있습니다. 또한, IBM Cloud의 Kubernetes API를 사용하여 Hyperledger Fabric 네트워크를 설정하는 프로세스를 자동화하는 스크립트를 제공합니다.
+이 패턴은 IBM 클라우드에서 제공하는 _free cluster_ 를 사용하며, 개념증명(proof-of-concept) 용도로 활용할 수 있습니다. 또한, IBM 클라우드의 Kubernetes API를 사용하여 Hyperledger Fabric 네트워크를 설정하는 프로세스를 자동화하는 스크립트를 제공합니다.
 
 
 독자는 이 패턴을 완료하고 다음을 이해하게 될 것입니다:
@@ -36,7 +36,7 @@ IBM 클라우드는 클러스터의 최대 가용성과 기능성을 이끌어�
 ## 구성 요소
 
 * [Hyperledger Fabric](https://hyperledger-fabric.readthedocs.io/): Hyperledger Fabric은 고도의 기밀성, 탄력성, 유연성 및 확장성을 제공하는 모듈러 아키텍처 기반의 분산원장 술루션을 위한 플랫폼입니다.
-* [IBM Cloud Container Service](https://console.bluemix.net/containers-kubernetes/catalog/cluster): IBM Container Service는 지능형 스케줄링, 자가치유 및 수평 확장의 조화로운 관리를 가능하게 합니다.
+* [IBM 클라우드 컨테이너 서비스](https://console.bluemix.net/containers-kubernetes/catalog/cluster): IBM Container Service는 지능형 스케줄링, 자가치유 및 수평 확장의 조화로운 관리를 가능하게 합니다.
 
 ## 주요 기술
 
@@ -59,16 +59,18 @@ IBM 클라우드는 클러스터의 최대 가용성과 기능성을 이끌어�
 
 다음 순서를 따라 환경을 설정하고 코드를 실행합니다.
 
-1. [IBM Cloud에 Kubernetes 클러스터 생성](#1-IBM-Cloud에-Kubernetes-클러스터-생성)
+1. [IBM 클라우드에 Kubernetes 클러스터 생성](#1-IBM-클라우드에-Kubernetes-클러스터-생성)
 2. [CLI 설치](#2-CLI-설치)
 3. [Kubernetes 클러스터에 접근 권한 얻기](#3-Kubernetes-클러스터에-접근-권한-얻기)
 4. [Kubernetes 클러스터에 Hyperledger Fabric 네터워크 배포](#4-Kubernetes-클러스터에-Hyperledger-Fabric-네터워크-배포)
 5. [배포된 네트워크 테스트](#5-배포된-네트워크-테스트)
 6. [Kubernetes 대시보드 확인](#6-Kubernetes-대시보드-확인)
 
-### 1. IBM Cloud에 Kubernetes 클러스터 생성
+### 1. IBM 클라우드에 Kubernetes 클러스터 생성
 
-* Create a Kubernetes cluster with [IBM Cloud Container Service](https://console.bluemix.net/containers-kubernetes/catalog/cluster) using GUI. This pattern uses the _free cluster_.
+* Create a Kubernetes cluster with [IBM 클라우드 컨테이너 서비스](https://console.bluemix.net/containers-kubernetes/catalog/cluster) using GUI. This pattern uses the _free cluster_.
+
+* Create a Kubernetes cluster with [IBM 클라우드 컨테이너 서비스](https://console.bluemix.net/containers-kubernetes/catalog/cluster) using GUI. This pattern uses the _free cluster_.
 
   ![](images/create-service.png)
   
@@ -77,7 +79,7 @@ IBM 클라우드는 클러스터의 최대 가용성과 기능성을 이끌어�
 
 ### 2. CLI 설치
 
-* Install [IBM Cloud CLI](https://console.bluemix.net/docs/cli/reference/bluemix_cli/get_started.html#getting-started). The prefix for running commands by using the Bluemix CLI is `bx`.
+* Install [IBM 클라우드 CLI](https://console.bluemix.net/docs/cli/reference/bluemix_cli/get_started.html#getting-started). The prefix for running commands by using the Bluemix CLI is `bx`.
 
 * Install [Kubernetes CLI](https://kubernetes.io/docs/tasks/tools/install-kubectl/). The prefix for running commands by using the Kubernetes CLI is `kubectl`.
 
@@ -88,15 +90,15 @@ IBM 클라우드는 클러스터의 최대 가용성과 기능성을 이끌어�
 
 ### 3. Kubernetes 클러스터에 접근 권한 얻기
   
-  Access the [IBM Cloud Dashboard](https://console.bluemix.net/dashboard/apps).  Choose the same cloud foundry org and cloud
+  Access the [IBM 클라우드 Dashboard](https://console.bluemix.net/dashboard/apps).  Choose the same cloud foundry org and cloud
   foundry space where cluster is created.
   
-  * Check the status of your cluster `IBM Cloud Dashboard -> <your cluster> -> Worker Nodes`. If status is not `ready`, then
+  * Check the status of your cluster `IBM 클라우드 Dashboard -> <your cluster> -> Worker Nodes`. If status is not `ready`, then
     you need to wait for some more time to proceed further.
     
     ![](images/cluster-status.png)
     
-  * Once your cluster is ready, open the access tab `IBM Cloud Dashboard -> <your cluster> -> Access` as shown in snapshot.
+  * Once your cluster is ready, open the access tab `IBM 클라우드 Dashboard -> <your cluster> -> Access` as shown in snapshot.
   
     ![](images/gain-access-to-cluster.png)
   
