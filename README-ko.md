@@ -90,17 +90,17 @@ IBM 클라우드는 클러스터의 최대 가용성과 기능성을 이끌어�
   
   [IBM 클라우드 대시보드](https://console.bluemix.net/dashboard/apps)에서 클러스터가 생성 된 동일한 클라우드 파운드리 조직 및 클라우드 파운드리 공간을 선택하세요.
   
-  * 클러스터의 상태를 확인합니다. `IBM 클라우드 대시보드 -> <생선된 클러스터> -> 작업 노드`. 만약 상태가 `ready`가 아니라면 계속 기다립니다.
+  * 클러스터의 상태를 확인합니다. `IBM Cloud Dashboard -> <your cluster> -> Worker Nodes`. 만약 상태가 `ready`가 아니라면 계속 기다립니다.
     
     ![](images/cluster-status.png)
     
-  * Once your cluster is ready, open the access tab `IBM 클라우드 Dashboard -> <your cluster> -> Access` as shown in snapshot.
+  * 클러스터가 준비되면 아래 스냅샷에 보이는대로 접근 탭을 엽니다. `IBM Cloud Dashboard -> <your cluster> -> Access`
   
     ![](images/gain-access-to-cluster.png)
   
-  * Perform the steps provided under the section `Gain access to your cluster`.
+  * `Gain access to your cluster` 섹션에 제공된 가이드를 따라 순서를 진행합니다.
 
-  * Verify that the kubectl commands run properly with your cluster by checking the Kubernetes CLI server version.
+  * Kubernetes CLI 서버 버전을 확인하여 kubectl 명령이 클러스터에서 제대로 실행되는지 확인합니다.
   
     ```
     $ kubectl version  --short
@@ -110,7 +110,7 @@ IBM 클라우드는 클러스터의 최대 가용성과 기능성을 이끌어�
     
 ### 4. Kubernetes 클러스터에 Hyperledger Fabric 네터워크 배포
 
-#### Understand the network topology
+#### 네트워크 토폴로지 이해하기
 
 This pattern provides a script which automatically provisions a sample Hyperledger Fabric network consisting of four organizations, each maintaining one peer node, and a 'solo' ordering service. Also, the script creates a channel named as `channel1`, joins all peers to the channel `channel1`, install chaincode on all peers and instantiate chaincode on channel. The pattern also helps to drive execution of transactions against the deployed chaincode.
 
