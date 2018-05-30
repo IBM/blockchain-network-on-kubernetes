@@ -40,32 +40,33 @@ IBM 클라우드는 클러스터의 최대 가용성과 기능성을 이끌어�
 
 ## 주요 기술
 
-* [Blockchain](https://en.wikipedia.org/wiki/Blockchain): 블록체인은 네트워크의 모든 거래내역이 분산 된 디지털 공개 원장입니다.
+* [Blockchain](https://en.wikipedia.org/wiki/Blockchain): 블록체인은 네트워크의 모든 거래내역이 분산된 디지털 공개 원장입니다.
 * [Kubernetes Cluster](https://kubernetes.io/docs): Kubernetes Engine에서 컨테이너 클러스터는 최소 하나의 마스터 클러스터와 노드라고 불리는 여러 작업 시스템으로 구성됩니다. 컨테이너 클러스터는 Kubernetes 엔진의 기반입니다.
 
 ## 비디오 참조
 
 [![](http://img.youtube.com/vi/DFYk6XaMHc0/0.jpg)](https://youtu.be/DFYk6XaMHc0)
 
-## Kubernetes Concepts Used
-* [Kubernetes Pods](https://kubernetes.io/docs/concepts/workloads/pods/pod/) - Pods represent the smallest deployable units in a Kubernetes cluster and are used to group containers that must be treated as a single unit.
-* [Kubernetes Jobs](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/) - A job creates one or more pods and ensures that a specified number of them successfully terminate. As pods successfully complete, the job tracks the successful completions.
-* [Kubernetes Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) - A deployment is a Kubernetes resource where you specify your containers and other Kubernetes resources that are required to run your app, such as persistent storage, services, or annotations.
-* [Kubernetes Services](https://kubernetes.io/docs/concepts/services-networking/service/) - A Kubernetes service groups a set of pods and provides network connection to these pods for other services in the cluster without exposing the actual private IP address of each pod.
-* [Kubernetes Persistent Volumes (PV)](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) - PersistentVolumes are a way for users to *claim* durable storage such as NFS file storage.
+## Kubernetes의 개념 정의
 
-## Steps
+* [Kubernetes Pods](https://kubernetes.io/docs/concepts/workloads/pods/pod/) - Pod는 Kubernetes 클러스터에서 배포 가능한 최소 단위를 뜻하며, 단일로 처리해야 하는 여러 컨테이너를 그룹화하는 데 사용됩니다.
+* [Kubernetes Jobs](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/) - Job은 하나 이상의 Pod를 생성하고 지정된 수의 Pod가 성공적으로 종료하도록 합니다. Pod를 가 성공적으로 완료되면 Job은 이를 기록합니다.
+* [Kubernetes Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) - Deployment는 저장장치, 서비스 및 어노테이션 등 어플리케이션을 실행하기 위해 필요한 기타 리소스와 컨테이너를 지정하는 Kubernetes 리소스입니다.
+* [Kubernetes Services](https://kubernetes.io/docs/concepts/services-networking/service/) - Kubernetes service는 여러 Pod를 그룹화하고 클러스터 내 다른 서비스를 위해 개별 Pod의 IP 주소를 은폐하면서 네트워크 연결을 제공합니다.
+* [Kubernetes Persistent Volumes (PV)](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) - Persistent Volume은 사용자가 NFS와 같은 파일 저장소를 요청하는 방법입니다.
 
-Follow these steps to setup and run this code pattern. 
+## 순서
 
-1. [Create a Kubernetes Cluster on IBM Cloud](#1-create-a-kubernetes-cluster-on-ibm-cloud)
-2. [Setting up CLIs](#2-setting-up-clis)
-3. [Gain access to your Kubernetes Cluster](#3-gain-access-to-your-kubernetes-cluster)
-4. [Deploy Hyperledger Fabric Network into Kubernetes Cluster](#4-deploy-hyperledger-fabric-network-into-kubernetes-cluster)
-5. [Test the deployed network](#5-test-the-deployed-network)
-6. [View the Kubernetes Dashboard](#6-view-the-kubernetes-dashboard)
+다음 순서를 따라 환경을 설정하고 코드를 실행합니다.
 
-### 1. Create a Kubernetes Cluster on IBM Cloud
+1. [IBM Cloud에 Kubernetes 클러스터 생성](#1-IBM-Cloud에-Kubernetes-클러스터-생성)
+2. [CLI 설치](#2-CLI-설치)
+3. [Kubernetes 클러스터에 접근 권한 얻기](#3-Kubernetes-클러스터에-접근-권한-얻기)
+4. [Kubernetes 클러스터에 Hyperledger Fabric 네터워크 배포](#4-Kubernetes-클러스터에-Hyperledger-Fabric-네터워크-배포)
+5. [배포된 네트워크 테스트](#5-배포된-네트워크-테스트)
+6. [Kubernetes 대시보드 확인](#6-Kubernetes-대시보드-확인)
+
+### 1. IBM Cloud에 Kubernetes 클러스터 생성
 
 * Create a Kubernetes cluster with [IBM Cloud Container Service](https://console.bluemix.net/containers-kubernetes/catalog/cluster) using GUI. This pattern uses the _free cluster_.
 
@@ -74,7 +75,7 @@ Follow these steps to setup and run this code pattern.
   Note: It can take up to 15 minutes for the cluster to be set up and provisioned.
 
 
-### 2. Setting up CLIs
+### 2. CLI 설치
 
 * Install [IBM Cloud CLI](https://console.bluemix.net/docs/cli/reference/bluemix_cli/get_started.html#getting-started). The prefix for running commands by using the Bluemix CLI is `bx`.
 
@@ -85,7 +86,7 @@ Follow these steps to setup and run this code pattern.
   bx plugin install container-service -r Bluemix
   ```
 
-### 3. Gain access to your Kubernetes Cluster
+### 3. Kubernetes 클러스터에 접근 권한 얻기
   
   Access the [IBM Cloud Dashboard](https://console.bluemix.net/dashboard/apps).  Choose the same cloud foundry org and cloud
   foundry space where cluster is created.
@@ -109,7 +110,7 @@ Follow these steps to setup and run this code pattern.
     Server Version: v1.8.6-4+9c2a4c1ed1ee7e
     ```
     
-### 4. Deploy Hyperledger Fabric Network into Kubernetes Cluster
+### 4. Kubernetes 클러스터에 Hyperledger Fabric 네터워크 배포
 
 #### Understand the network topology
 
@@ -156,7 +157,7 @@ If required, you can bring your hyperledger fabric network down using the script
   $ ./deleteNetwork.sh
   ```
 
-### 5. Test the deployed network
+### 5. 배포된 네트워크 테스트
 
 After successful execution of the script `setup_blockchainNetwork.sh`, check the status of pods.
 
@@ -205,7 +206,7 @@ Let’s confirm that our previous invocation executed properly. We initialized t
 
   ![](images/third-query.png)
 
-### 6. View the Kubernetes Dashboard
+### 6. Kubernetes 대시보드 확인
 
 Obtain the token using the following command to authenticate for Kubernetes dashboard.
 
