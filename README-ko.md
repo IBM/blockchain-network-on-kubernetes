@@ -35,17 +35,15 @@ IBM 클라우드는 클러스터의 최대 가용성과 기능성을 이끌어�
 
 ## 구성 요소
 
-* [Hyperledger Fabric](https://hyperledger-fabric.readthedocs.io/): Hyperledger Fabric is a platform for distributed ledger solutions underpinned by a modular architecture delivering high degrees of confidentiality, resiliency, flexibility and scalability.
+* [Hyperledger Fabric](https://hyperledger-fabric.readthedocs.io/): Hyperledger Fabric은 고도의 기밀성, 탄력성, 유연성 및 확장성을 제공하는 모듈러 아키텍처 기반의 분산원장 술루션을 위한 플랫폼입니다.
+* [IBM Cloud Container Service](https://console.bluemix.net/containers-kubernetes/catalog/cluster): IBM Container Service는 지능형 스케줄링, 자가치유 및 수평 확장의 조화로운 관리를 가능하게 합니다.
 
-* [IBM Cloud Container Service](https://console.bluemix.net/containers-kubernetes/catalog/cluster): IBM Container Service enables the orchestration of intelligent scheduling, self-healing, and horizontal scaling.
+## 주요 기술
 
-## Featured technologies
+* [Blockchain](https://en.wikipedia.org/wiki/Blockchain): 블록체인은 네트워크의 모든 거래내역이 분산 된 디지털 공개 원장입니다.
+* [Kubernetes Cluster](https://kubernetes.io/docs): Kubernetes Engine에서 컨테이너 클러스터는 최소 하나의 마스터 클러스터와 노드라고 불리는 여러 작업 시스템으로 구성됩니다. 컨테이너 클러스터는 Kubernetes 엔진의 기반입니다.
 
-* [Blockchain](https://en.wikipedia.org/wiki/Blockchain): A blockchain is a digitized, decentralized, public ledger of all transactions in a network.
-
-* [Kubernetes Cluster](https://kubernetes.io/docs): In Kubernetes Engine, a container cluster consists of at least one cluster master and multiple worker machines called nodes. A container cluster is the foundation of Kubernetes Engine.
-
-## Watch the Video
+## 비디오 참조
 
 [![](http://img.youtube.com/vi/DFYk6XaMHc0/0.jpg)](https://youtu.be/DFYk6XaMHc0)
 
