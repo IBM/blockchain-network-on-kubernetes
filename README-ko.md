@@ -3,7 +3,7 @@
 
 블록 체인은 거래내역을 기록하기 위한 공유 불변의 원장입니다. Linux 재단의 Hyperledger Fabric은 IBM이 구현한 Permissioned 네트워크입니다. 블록체인의 활용 예제를 개발할 때 가장 먼저해야 할 일은 Hyperledger Fabric의 응용 프로그램 개발 및 배포 환경을 갖추는 것입니다. Hyperledger Fabric 네트워크를 구성하는 방법은 여러 가지가 있습니다.
 * [Hyperledger Fabric network On-Premise](http://hyperledger-fabric.readthedocs.io/en/release-1.0/build_network.html)
-* [IBM 클라우드](https://console.bluemix.net/)의 [블록체인 서비스](https://console.bluemix.net/catalog/services/blockchain). IBM 클라우드는 스타터 및 엔터프라이즈 멤버쉽 플랜 블록체인 서비스를 제공합니다.
+* [IBM 클라우드](https://console.bluemix.net/)의 [블록체인 서비스](https://console.bluemix.net/catalog/services/blockchain). IBM 클라우드는 스타터 및 엔터프라이즈 멤버십 플랜 블록체인 서비스를 제공합니다.
 * [IBM 클라우드 컨테이너 서비스](https://console.bluemix.net/containers-kubernetes/catalog/cluster)에서 제공하는 [Kubernetes API](https://console.bluemix.net/containers-kubernetes/catalog/cluster)를 사용한 Hyperledger Fabric 네트워크
 
 이번 코드 패턴은 **IBM Cloud Container Service의 Kubernetes API를 활용한 Hyperledger Fabric**에서 비즈니스 네트워크를 설정하는 순서에 대한 것입니다.
