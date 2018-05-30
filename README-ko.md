@@ -24,16 +24,16 @@ IBM 클라우드는 클러스터의 최대 가용성과 기능성을 이끌어�
 * 네트워크 토폴로지에 따른 설정 파일 수정하기
 * Kubernetes 클러스터에 Hyperledger Fabric 네트워크 배포하기
 
-## Flow
+## 다음 순서를 따라하세요.
 
   ![](images/architecture.png)
 
-1. Log in to IBM Cloud CLI and initialize IBM Cloud Container Service plugin.
-2. Set context for Kubernetes cluster using CLI and download Kubernetes configuration files. After downloading configuration files, set KUBECONFIG environment variable.
-3. Run script to deploy your hyperledger fabric network on Kubernetes cluster.
-4. Access Kubernetes dashboard.
+1. IBM 클라우드 CLI에 접속하여 IBM 클라우드 컨테이너 서비스 플러그인을 초기화합니다.
+2. CLI를 사용하여 Kubernetes 클러스터를에 대한 context를 변경하고 Kubernetes 설정 파일을 다운로드하세요. 설정 파일을 다운로드 한 후 KUBECONFIG 환경 변수를 설정하세요.
+3. 스크립트를 실행하여 Kubernetes 클러스터에 Hyperledger Fabric 네트워크를 배포합니다.
+4. Kubernetes의 대시보드로 이동하세요.
 
-## Included components
+## 구성 요소
 
 * [Hyperledger Fabric](https://hyperledger-fabric.readthedocs.io/): Hyperledger Fabric is a platform for distributed ledger solutions underpinned by a modular architecture delivering high degrees of confidentiality, resiliency, flexibility and scalability.
 
