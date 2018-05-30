@@ -12,7 +12,7 @@ Hyperledger Fabric 네트워크를 IBM Cloud에서 호스팅하면 여러 사용
 
 #### Kubernetes 클러스터
 
-[IBM Cloud Container Service](https://console.bluemix.net/containers-kubernetes/catalog/cluster)는 Kubernetes 기능을 익히고 테스트 할 수 있도록 2 개의 CPU, 4GB 메모리 및 1 개의 worker 노드로 이루어진 무료 클러스터 구성을 제공합니다. 그러나 NFS처럼 볼륨 기반의 파일 저장소 기능은 제공하지 않습니다.
+[IBM Cloud Container Service](https://console.bluemix.net/containers-kubernetes/catalog/cluster)는 Kubernetes 기능을 익히고 테스트할 수 있도록 2 개의 CPU, 4GB 메모리 및 1 개의 worker 노드로 이루어진 무료 클러스터 구성을 제공합니다. 그러나 NFS처럼 볼륨 기반의 파일 저장소 기능은 제공하지 않습니다.
 
 To setup your cluster for maximum availability and capacity, IBM Cloud allows you to create a fully customizable, production-ready cluster called _standard cluster_. _Standard clusters_ allow highly available cluster configurations such as a setup with two clusters that run in different regions, each with multiple worker nodes. Please see https://console.bluemix.net/docs/containers/cs_planning.html#cs_planning_cluster_config to review other options for highly available cluster configurations.
 
