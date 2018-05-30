@@ -1,10 +1,10 @@
 
 # Kubernetes API를 사용하여 IBM Cloud에 블록체인 네트워크 배포하기
 
-Blockchain is a shared, immutable ledger for recording the history of transactions. The Linux Foundation’s Hyperledger Fabric, the software implementation of blockchain IBM is committed to, is a permissioned network. For developing any blockchain use-case, the very first thing is to have a development environment for Hyperledger Fabric to create and deploy the application. Hyperledger Fabric network can be setup in multiple ways. 
+블록 체인은 거래내역을 기록하기 위한 공유 불변의 원장입니다. Linux 재단의 Hyperledger Fabric은 IBM이 구현한 Permissioned 네트워크입니다. 블록체인의 활용 예제를 개발할 때 가장 먼저해야 할 일은 Hyperledger Fabric의 응용 프로그램 개발 및 배포 환경을 갖추는 것입니다. Hyperledger Fabric 네트워크를 구성하는 방법은 여러 가지가 있습니다.
 * [Hyperledger Fabric network On-Premise](http://hyperledger-fabric.readthedocs.io/en/release-1.0/build_network.html)
-* Using [Blockchain as a service](https://console.bluemix.net/catalog/services/blockchain) hosted on [IBM Cloud](https://console.bluemix.net/). IBM Cloud provides you Blockchain as a service with a Starter Membership Plan and Enterprise Membership Plan.
-* Hyperledger Fabric network using [Kubernetes APIs]((https://console.bluemix.net/containers-kubernetes/catalog/cluster)) on [IBM Cloud Container Service](https://console.bluemix.net/containers-kubernetes/catalog/cluster)
+* [IBM 클라우드](https://console.bluemix.net/)를 이용한 [블록체인 서비스](https://console.bluemix.net/catalog/services/blockchain). IBM 클라우드는 스타터 및 엔터프라이즈 멤버쉽 플랜 블록체인 서비스를 제공합니다.
+* [IBM 클라우드 컨테이너 서비스](https://console.bluemix.net/containers-kubernetes/catalog/cluster)에서 제공하는 [Kubernetes API](https://console.bluemix.net/containers-kubernetes/catalog/cluster)를 사용한 Hyperledger 패브릭 네트워크
 
 This code pattern demonstrates the steps involved in setting up your business network on **Hyperledger Fabric using Kubernetes APIs on IBM Cloud Container Service**. 
 
