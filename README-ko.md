@@ -3,12 +3,12 @@
 
 블록 체인은 거래내역을 기록하기 위한 공유 불변의 원장입니다. Linux 재단의 Hyperledger Fabric은 IBM이 구현한 Permissioned 네트워크입니다. 블록체인의 활용 예제를 개발할 때 가장 먼저해야 할 일은 Hyperledger Fabric의 응용 프로그램 개발 및 배포 환경을 갖추는 것입니다. Hyperledger Fabric 네트워크를 구성하는 방법은 여러 가지가 있습니다.
 * [Hyperledger Fabric network On-Premise](http://hyperledger-fabric.readthedocs.io/en/release-1.0/build_network.html)
-* [IBM 클라우드](https://console.bluemix.net/)를 이용한 [블록체인 서비스](https://console.bluemix.net/catalog/services/blockchain). IBM 클라우드는 스타터 및 엔터프라이즈 멤버쉽 플랜 블록체인 서비스를 제공합니다.
-* [IBM 클라우드 컨테이너 서비스](https://console.bluemix.net/containers-kubernetes/catalog/cluster)에서 제공하는 [Kubernetes API](https://console.bluemix.net/containers-kubernetes/catalog/cluster)를 사용한 Hyperledger 패브릭 네트워크
+* [IBM 클라우드](https://console.bluemix.net/)의 [블록체인 서비스](https://console.bluemix.net/catalog/services/blockchain). IBM 클라우드는 스타터 및 엔터프라이즈 멤버쉽 플랜 블록체인 서비스를 제공합니다.
+* [IBM 클라우드 컨테이너 서비스](https://console.bluemix.net/containers-kubernetes/catalog/cluster)에서 제공하는 [Kubernetes API](https://console.bluemix.net/containers-kubernetes/catalog/cluster)를 사용한 Hyperledger Fabric 네트워크
 
-This code pattern demonstrates the steps involved in setting up your business network on **Hyperledger Fabric using Kubernetes APIs on IBM Cloud Container Service**. 
+이번 코드 패턴은 **IBM Cloud Container Service의 Kubernetes API를 활용한 Hyperledger Fabric**에서 비즈니스 네트워크를 설정하는 순서에 대한 것입니다.
 
-Hosting the Hyperledger Fabric network on IBM Cloud provides you many benefits like multiple users can work on the same setup, the setup can be used for different blockchain applications, the setup can be reused and so on. Please note that the blockchain network setup on Kubernetes is good to use for demo scenarios but for production, it is recommended to use IBM Blockchain as a service hosted on IBM Cloud.
+Hyperledger Fabric 네트워크를 IBM Cloud에서 호스팅하면 여러 사용자가 같은 환경에서 작업이 가능하고, 환경을 다른 블록체인 애플리케이션에 재 사용하는 등 다양한 이점이 있습니다. Kubernetes의 블록체인 네트워크 설정은 데모 시나리오 목적으로는 충분하지만, 상업용으로서는 IBM 클라우드에서 호스팅하는 블록체인 서비스를 추천합니다. 데모 시나리오에서는 Kubernetes의 블록체인 네트워크 설정을 사용하는 것이 좋지만 프로덕션 환경에서는 IBM Cloud에서 호스팅되는 서비스로 IBM Blockchain을 사용하는 것이 좋습니다.
 
 #### Kubernetes Cluster
 
