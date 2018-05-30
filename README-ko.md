@@ -10,9 +10,9 @@
 
 Hyperledger Fabric 네트워크를 IBM Cloud에서 호스팅하면 여러 사용자가 같은 환경에서 작업이 가능하고, 환경을 다른 블록체인 애플리케이션에 재 사용하는 등 다양한 이점이 있습니다. Kubernetes의 블록체인 네트워크 설정은 데모 시나리오 목적으로는 충분하지만, 상업용으로서는 IBM 클라우드에서 호스팅하는 블록체인 서비스를 추천합니다. 데모 시나리오에서는 Kubernetes의 블록체인 네트워크 설정을 사용하는 것이 좋지만 프로덕션 환경에서는 IBM Cloud에서 호스팅되는 서비스로 IBM Blockchain을 사용하는 것이 좋습니다.
 
-#### Kubernetes Cluster
+#### Kubernetes 클러스터
 
-[IBM Cloud Container Service](https://console.bluemix.net/containers-kubernetes/catalog/cluster) allows you to create a free cluster that comes with 2 CPUs, 4 GB memory, and 1 worker node. It allows you to get familiar with and test Kubernetes capabilities. However they lack capabilities like persistent NFS file-based storage with volumes.
+[IBM Cloud Container Service](https://console.bluemix.net/containers-kubernetes/catalog/cluster)는 Kubernetes 기능을 익히고 테스트 할 수도록 2 개의 CPU, 4GB 메모리 및 1 개의 worker 노드로 이루어진 무료 클러스터 구성을 제공합니다. 그러나 NFS처럼 볼륨 기반의 파일 저장소 기능은 제공하지 않습니다.
 
 To setup your cluster for maximum availability and capacity, IBM Cloud allows you to create a fully customizable, production-ready cluster called _standard cluster_. _Standard clusters_ allow highly available cluster configurations such as a setup with two clusters that run in different regions, each with multiple worker nodes. Please see https://console.bluemix.net/docs/containers/cs_planning.html#cs_planning_cluster_config to review other options for highly available cluster configurations.
 
