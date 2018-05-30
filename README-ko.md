@@ -8,7 +8,7 @@
 
 이번 코드 패턴은 **IBM Cloud Container Service의 Kubernetes API를 활용한 Hyperledger Fabric**에서 비즈니스 네트워크를 설정하는 순서에 대한 것입니다.
 
-Hyperledger Fabric 네트워크를 IBM Cloud에서 호스팅하면 여러 사용자가 같은 환경에서 작업이 가능하고, 환경을 다른 블록체인 애플리케이션에 재 사용하는 등 다양한 이점이 있습니다. Kubernetes의 블록체인 네트워크 설정은 데모 시나리오 목적으로는 충분하지만, 상업용으로서는 IBM 클라우드에서 호스팅하는 블록체인 서비스를 추천합니다. 데모 시나리오에서는 Kubernetes의 블록체인 네트워크 설정을 사용하는 것이 좋지만 프로덕션 환경에서는 IBM Cloud에서 호스팅되는 서비스로 IBM Blockchain을 사용하는 것이 좋습니다.
+Hyperledger Fabric 네트워크를 IBM Cloud에서 호스팅 하면 여러 사용자가 같은 환경에서 작업이 가능하고, 환경을 다른 블록체인 애플리케이션에 재 사용하는 등 다양한 이점이 있습니다. Kubernetes의 블록체인 네트워크 설정은 데모 시나리오 목적으로는 충분하지만, 상업용으로서는 IBM 클라우드에서 호스팅 하는 블록체인 서비스를 추천합니다. 데모 시나리오에서는 Kubernetes의 블록체인 네트워크 설정을 사용하는 것이 좋지만 프로덕션 환경에서는 IBM Cloud에서 호스팅되는 서비스로 IBM Blockchain을 사용하는 것이 좋습니다.
 
 #### Kubernetes 클러스터
 
