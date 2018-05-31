@@ -6,7 +6,7 @@
 * [IBM 클라우드](https://console.bluemix.net/)의 [블록체인 서비스](https://console.bluemix.net/catalog/services/blockchain). IBM 클라우드는 스타터 및 엔터프라이즈 멤버십 플랜 블록체인 서비스를 제공합니다.
 * [IBM 클라우드 컨테이너 서비스](https://console.bluemix.net/containers-kubernetes/catalog/cluster)에서 제공하는 [Kubernetes API](https://console.bluemix.net/containers-kubernetes/catalog/cluster)를 사용한 Hyperledger Fabric 네트워크
 
-이번 코드 패턴은 **IBM 클라우드 컨테이너 서비스의 Kubernetes API를 활용하여 Hyperledger Fabric에서 비즈니스 네트워크를 설정하는 순서**에 대한 것입니다.
+이번 코드 패턴은 **Hyperledger Fabric에서 IBM 클라우드 컨테이너 서비스의 Kubernetes API를 활용**하여 비즈니스 네트워크를 설정하는 순서에 대한 것입니다.
 
 Hyperledger Fabric 네트워크를 IBM 클라우드에서 호스팅 하면 여러 사용자가 같은 환경에서 작업이 가능하고, 환경을 다른 블록체인 애플리케이션에 재 사용하는 등 다양한 이점이 있습니다. Kubernetes의 블록체인 네트워크 설정은 데모 시나리오 목적으로는 충분하지만, 상업용으로서는 IBM 클라우드에서 호스팅 하는 블록체인 서비스를 추천합니다.
 
