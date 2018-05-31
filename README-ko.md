@@ -224,13 +224,11 @@ Kubernetes 대시보드 인증을 위해 다음 명령을 사용하여 토큰을
 
   ![](images/kubernetes-dashboard.png)
 
-The hyperledger fabric network is ready to use. You can start developing your blockchain applications using node sdk or hyperledger composer for this deployed network.
-
 이제 Hyperledger Fabric 네트워크가 준비되었습니다. 이 배포된 네트워크에 노드 SDK 또는 Hyperledger Composer를 사용하여 블록체인 어플리케이션을 개발해보세요.
 
 ## 문제해결
 
-[See DEBUGGING.md.](DEBUGGING.md)
+[DEBUGGING.md 참조](DEBUGGING.md)
 
 ## 라이센스
 
