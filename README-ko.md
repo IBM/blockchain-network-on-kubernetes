@@ -14,7 +14,7 @@ Hyperledger Fabric 네트워크를 IBM 클라우드에서 호스팅 하면 여�
 
 [IBM 클라우드 컨테이너 서비스](https://console.bluemix.net/containers-kubernetes/catalog/cluster)는 Kubernetes 기능을 익히고 테스트할 수 있도록 2 개의 CPU, 4GB 메모리 및 1 개의 worker 노드로 이루어진 무료 클러스터 구성을 제공합니다. 그러나 NFS처럼 볼륨 기반의 파일 저장소 기능은 제공하지 않습니다.
 
-IBM 클라우드는 클러스터의 최대 가용성과 기능성을 이끌어내기 위해 즉시 상업용으로 사용 가능하며 완벽한 커스터마이징을 지원하는 _Standard Cluster_ 를 제공합니다. _Standard Cluster_ 는 서로 다른 영역에서 실행되는 다중 작업노드를 포함한 클러스터 구성과 같은 고가용성 클러스터 설정이 가능합니다. 고가용성 클러스터 구성에 대한 다른 옵션을 검토하려면 https://console.bluemix.net/docs/containers/cs_planning.html#cs_planning_cluster_config 를 참조하십시오.
+IBM 클라우드는 클러스터의 최대 가용성과 기능성을 이끌어내기 위해 즉시 상업용으로 사용 가능하며 완벽한 커스터마이징을 지원하는 _Standard Cluster_ 를 제공합니다. _Standard Cluster_ 는 서로 다른 영역에서 실행되는 다중 작업노드를 포함한 클러스터 구성과 같은 고가용성 클러스터 설정이 가능합니다. 고가용성 클러스터 구성에 대한 다른 옵션을 검토하려면 https://console.bluemix.net/docs/containers/cs_planning.html#cs_planning_cluster_config 를 참조하세요.
 
 이 패턴은 IBM 클라우드에서 제공하는 _free cluster_ 를 사용하며, 개념증명(proof-of-concept) 용도로 활용할 수 있습니다. 또한, IBM 클라우드의 Kubernetes API를 사용하여 Hyperledger Fabric 네트워크를 설정하는 프로세스를 자동화하는 스크립트를 제공합니다.
 
@@ -144,7 +144,7 @@ Kubernetes 설정 스크립트를 사용자의 홈 디렉토리에 복사 또는
   $ ./setup_blockchainNetwork.sh
   ```
 
-주의: 스크립트를 실행하기 전에 환경을 확인하십시오. 3번째 순서에서 설명한 대로 클러스터에서 kubectl 명령을 올바르게 실행할 수 있어야 합니다.
+주의: 스크립트를 실행하기 전에 실행환경을 먼저 확인하세요. 3번째 순서에서 설명한 대로 클러스터에서 kubectl 명령을 올바르게 실행할 수 있어야 합니다.
 
 #### 네트워크 삭제하기
 
