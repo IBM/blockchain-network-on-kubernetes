@@ -110,11 +110,11 @@ IBM 클라우드는 클러스터의 최대 가용성과 기능성을 이끌어�
     
 ### 4. Kubernetes 클러스터에 Hyperledger Fabric 네터워크 배포
 
-#### 네트워크 토폴로지를 이해하세요
+#### 네트워크 토폴로지 이해하기
 
 이 패턴은 각 1 개의 피어와 '솔로' 주문 서비스로 구성된, 총 4 개의 조직을 포함한 Hyperledger Fabric 네트워크 샘플을 자동으로 준비하는 스크립트를 제공합니다. 스크립트는 또한 `channel1`이란 이름의 채널을 생성하고 모든 피어를 이 채널로 연결합니다. 그다음, 체인코드를 모든 피어에게 설치하여 채널에 인스턴스화합니다. 이 패턴은 배포된 체인코드에 대해 트랜잭션 실행이 이루어지도록 도움을 줍니다.
 
-#### Kubernetes 설정 스크립트 복사하세요
+#### Kubernetes 설정 스크립트 복사하기
 
 Kubernetes 설정 스크립트를 사용자의 홈 디렉토리에 복사 또는 다운로드합니다.
   ```
@@ -126,29 +126,29 @@ Kubernetes 설정 스크립트를 사용자의 홈 디렉토리에 복사 또는
   $ cd blockchain-network-on-kubernetes
   $ ls
   ```
-In the source directory, 
-  * `configFiles` contains Kubernetes configuration files
-  * `artifacts` contains the network configuration files
-  * `*.sh` scripts to deploy and delete the network
+소스 디렉토리 안에, 
+  * `configFiles` 디렉토리는 Kubernetes 설정 파일을 포함하고 있습니다.
+  * `artifacts` 디렉토리는 네트워크 설정 파일을 포함하고 있습니다.
+  * `*.sh` 파일은 네트워크를 배포 또는 삭제하는 스크립트입니다.
   
-#### Modify the Kubernetes configuration scripts
+#### Kubernetes 설정 스크립트 수정하기
 
-If there is any change in network topology, need to modify the configuration files (.yaml files) appropriately. The configuration files are located in `artifacts` and `configFiles` directory. For example, if you decide to increase/decrease the capacity of persistant volume then you need to modify `createVolume.yaml`.  
+네트워크 토폴로지가 변경되면 구성 파일 (.yaml 파일)을 적절하게 수정해야 합니다. 설정 파일은 `artifacts`와 `configFiles` 디렉토리에 있습니다. 예를 들어, 볼륨의 용량을 늘리거나 줄이려면 `createVolume.yaml` 파일을 수정해야 합니다. 
 
-#### Run the script to deploy your Hyperledger Fabric Network
+#### 스크립트를 실행하여 Hyperledger Fabric 네트워크 배포하기
 
-Once you have completed the changes (if any) in configuration files, you are ready to deploy your network. Execute the script to deploy your hyperledger fabric network.
+설정 파일이 완성되면 네트워크를 배포할 준비가 된 것입니다. 스크립트를 실행하여 Hyperledger Fabric 네트워크를 배포하세요.
 
   ```
   $ chmod +x setup_blockchainNetwork.sh
   $ ./setup_blockchainNetwork.sh
   ```
 
-Note: Before running the script, please check your environment. You should able to run `kubectl commands` properly with your cluster as explained in step 3. 
+주의: 스크립트를 실행하기 전에 환경을 확인하십시오. 3번째 순서에서 설명한 대로 클러스터에서 kubectl 명령을 올바르게 실행할 수 있어야 합니다.
 
-#### Delete the network
+#### 네트워크 삭제하기
 
-If required, you can bring your hyperledger fabric network down using the script `deleteNetwork.sh`. This script will delete all your pods, jobs, deployments etc. from your Kubernetes cluster.
+필요한 경우, `deleteNetwork.sh` 스크립트 파일을 실행하여 네트워크를 종료하세요. 이 스크립트는 Kubernetes 클러스터에서 모든 Pod, Job, Deployment 등을 삭제합니다.
 
   ```
   $ chmod +x deleteNetwork.sh
@@ -157,7 +157,7 @@ If required, you can bring your hyperledger fabric network down using the script
 
 ### 5. 배포된 네트워크 테스트
 
-After successful execution of the script `setup_blockchainNetwork.sh`, check the status of pods.
+`setup_blockchainNetwork.sh` 스크립트 파일 실행이 성공하면 Pod의 상태를 확인합니다.
 
   ```
   $ kubectl get pods
@@ -170,35 +170,33 @@ After successful execution of the script `setup_blockchainNetwork.sh`, check the
   blockchain-org4peer1-6b6c99c45-wz9wm    1/1       Running   0          4m
   ```
 
-As mentioned above, the script joins all peers on one channel `channel1`, install chaincode on all peers and instantiate chaincode on channel. It means we can execute an invoke/query command on any peer and the response should be same on all peers. Please note that in this pattern tls certs are disabled to avoid complexity. In this pattern, the CLI commands are used to test the network. For running a query against any peer, need to get into a bash shell of a peer, run the query and exit from the peer container.
+위에서 언급했듯이, 이 스크립트는 모든 피어를 한 채널(`channel1`)에 연결하고, 그 피어에 체인코드를 설치하여 채널에서 체인코드를 인스턴스화합니다. 이는 모든 피어에 대해 invoke / query 명령을 실행할 수 있음을 의미하며 응답은 모든 피어에서 동일해야합니다. 이 패턴에서는 쉬운 예를 위해 TLS 인증서를 배제하였음을 유의하기 바랍니다. CLI 명령은 네트워크를 테스트하는 데 사용됩니다. 모든 피어에 대해 쿼리를 실행하려면 피어의 bash 셸에서 쿼리를 실행하고 피어 컨테이너에서 나와야 합니다.
 
-Use the following command to get into a bash shell of a peer:
-
+피어의 bash 쉘에 들어가려면 다음 명령을 사용하세요:
   ```
   $ kubectl exec -it <blockchain-org1peer1 pod name> bash
   ```
 
-And the command to be used to exit from the peer container is:
-
+피어 컨테이너에서 나가는 명령은 다음과 같습니다:
   ```
   # exit
   ```
 
-**Query**
+**쿼리**
 
-Chaincode was instantiated with the values as `{ a: 100, b: 200 }`. Let’s query to `org1peer1` for the value of `a` to make sure the chaincode was properly instantiated.
+체인 코드는 '{a : 100, b : 200}' 값으로 인스턴스화되었습니다. 체인코드가 제대로 인스턴스화되었는지 확인하기 위해 `org`peer1`에 쿼리를 요청하여 `a`의 값을 확인해 봅시다.
 
   ![](images/first-query.png)
 
-**Invoke**
+**반영**
 
-Now let’s submit a request to `org2peer1` to move 20 from `a` to `b`. A new transaction will be generated and upon successful completion of transaction, state will get updated.
+이제 `org2peer1`에 `a`에서 `b`로 20을 빼서 더하라라는 요청을 보냅니다. 새로운 트랜잭션이 생성되고 트랜잭션이 성공적으로 완료되면 상태가 업데이트됩니다.
 
   ![](images/invoke.png)
 
-**Query**
+**쿼리**
 
-Let’s confirm that our previous invocation executed properly. We initialized the key `a` with a value of 100 and just removed 20 with our previous invocation. Therefore, a query against `a` should show 80 and a query against `b` should show 220. Now issue the query request to `org3peer1` and `org4peer1` as shown.
+우리의 이전 변경이 제대로 반영되었는지 확인합시다. 우리는 'a'키를 '100'값으로 초기화 하고, 이전 호출로 20을 제거했습니다. 그러므로 'a'에 대한 결과는 '80'이어야 하며 'b'의 결과는 '220'이어야 합니다. 이제 아래 그림과 같이 `org3peer1`와 `org4peer1`에 쿼리 요청을 보냅니다.
 
   ![](images/second-query.png)
 
@@ -206,32 +204,34 @@ Let’s confirm that our previous invocation executed properly. We initialized t
 
 ### 6. Kubernetes 대시보드 확인
 
-Obtain the token using the following command to authenticate for Kubernetes dashboard.
+Kubernetes 대시보드 인증을 위해 다음 명령을 사용하여 토큰을 얻습니다.
 
   ```
   $ kubectl config view -o jsonpath='{.users[0].user.auth-provider.config.id-token}'
   ```
 
-Copy the token. Launch your Kubernetes dashboard with the default port 8001.
+토큰을 복사하고 기본 포트를 8001로 설정하여 Kubernetes 대시보드를 시작합니다.
 
   ```
   $ kubectl proxy
   ```
 
-Open the URL http://localhost:8001/ui in a web browser to see the Kubernetes dashboard. It will prompt for the authentication.
+웹브라우져에서 http://localhost:8001/ui URL을 열어 Kubernetes 대시보드로 이동하면 인증을 요구하는 프롬트가 표시됩니다.
 
   ![](images/provide-token-for-dashboard.png)
 
-Provide the token and `SIGN-IN`. In the Workloads tab, you can see the resources that was created through scripts.
+토큰과 `SIGN-IN`을 입력합니다. Workloads탭에서 스크립트를 통해 생성 된 리소스를 확인할 수 있습니다.
 
   ![](images/kubernetes-dashboard.png)
 
 The hyperledger fabric network is ready to use. You can start developing your blockchain applications using node sdk or hyperledger composer for this deployed network.
 
-## Troubleshooting
+이제 Hyperledger Fabric 네트워크가 준비되었습니다. 이 배포된 네트워크에 노드 SDK 또는 Hyperledger Composer를 사용하여 블록체인 어플리케이션을 개발해보세요.
+
+## 문제해결
 
 [See DEBUGGING.md.](DEBUGGING.md)
 
-## License
+## 라이센스
 
 [Apache 2.0](LICENSE)
