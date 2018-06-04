@@ -1,3 +1,4 @@
+*Read this in other languages: [中国](README-cn.md).*
 
 # Deploy the Blockchain network using Kubernetes APIs on IBM Cloud
 
