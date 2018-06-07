@@ -234,6 +234,12 @@ The hyperledger fabric network is ready to use. You can start developing your bl
 
 [See DEBUGGING.md.](DEBUGGING.md)
 
+## Reference Links
+
+* [Hyperledger Fabric](https://hyperledger-fabric.readthedocs.io/en/release-1.1/)
+* [Kubernetes Concepts](https://kubernetes.io/docs/concepts/)
+* [IBM Blockchain Platform on IBM Container Service](https://github.com/IBM-Blockchain/ibm-container-service/)
+
 ## License
 
 [Apache 2.0](LICENSE)
