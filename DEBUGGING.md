@@ -44,4 +44,4 @@ Troubleshooting
 
   ![](images/error5.png)
 
-  It is intermittent issue and might occur becaue of network. Delete the network and retry afresh after sometime. 
+  It is intermittent issue and might occur because of network. Delete the network and retry afresh after sometime. 
