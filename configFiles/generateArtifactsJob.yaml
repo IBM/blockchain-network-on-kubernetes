@@ -19,23 +19,16 @@ spec:
           path: /var/run/docker.sock
       containers:
       - name: cryptogen
-        image: hyperledger/fabric-tools:x86_64-1.0.4
+        image: hyperledger/fabric-tools:x86_64-1.1.0
         imagePullPolicy: Always
         command: ["sh", "-c", "echo 'Cryptogen Starts'; ls -l /shared/artifacts; while [ ! -d /shared/artifacts ]; do echo Waiting for configFiles; sleep 1; done; cryptogen generate --config /shared/artifacts/crypto-config.yaml && cp -r crypto-config /shared/ && for file in $(find /shared/ -iname *_sk); do echo $file; dir=$(dirname $file); echo ${dir}; mv ${dir}/*_sk ${dir}/key.pem; done && find /shared -type d | xargs chmod a+rx && find /shared -type f | xargs chmod a+r && touch /shared/status_cryptogen_complete;"]
         volumeMounts:
         - mountPath: /shared
           name: sharedvolume
       - name: configtxgen
-        image: hyperledger/fabric-tools:x86_64-1.0.4
+        image: hyperledger/fabric-tools:x86_64-1.1.0
         imagePullPolicy: Always
         command: ["sh", "-c", "echo 'Configtxgen Starts'; ls -l /shared; sleep 1 && while [ ! -f /shared/status_cryptogen_complete ]; do echo Waiting for cryptogen; sleep 1; done; cp /shared/artifacts/configtx.yaml /shared/; cd /shared/; export FABRIC_CFG_PATH=$PWD; configtxgen -profile FourOrgsOrdererGenesis -outputBlock genesis.block && find /shared -type d | xargs chmod a+rx && find /shared -type f | xargs chmod a+r && touch /shared/status_configtxgen_complete && rm /shared/status_cryptogen_complete;"]
-        volumeMounts:
-        - mountPath: /shared
-          name: sharedvolume
-      - name: bootstrap
-        image: hyperledger/fabric-tools:x86_64-1.0.4
-        imagePullPolicy: Always
-        command: ["sh", "-c", "sleep 1 && while [ ! -f /shared/status_configtxgen_complete ]; do echo Waiting for configtxgen; sleep 1; done && cp -r /shared/artifacts/cas /shared && touch /shared/bootstrapped && rm /shared/status_configtxgen_complete && echo 'Done with bootstrapping';" ]
         volumeMounts:
         - mountPath: /shared
           name: sharedvolume
