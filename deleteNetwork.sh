@@ -28,7 +28,7 @@ kubectl get deployments
 echo -e "\nservices:"
 kubectl get services
 echo -e "\npods:"
-kubectl get pods --show-all
+kubectl get pods
 
 echo -e "\nNetwork Deleted!!\n"
 
