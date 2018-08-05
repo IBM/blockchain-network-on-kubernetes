@@ -80,10 +80,12 @@ spec:
         image: hyperledger/fabric-ca:x86_64-1.1.0
         command: ["sh", "-c", "sleep 1 && while [ ! -f /shared/status_configtxgen_complete ]; do echo Waiting for configtxgen; sleep 1; done; fabric-ca-server start -b admin:adminpw -d"]
         env:
+        - name: FABRIC_CA_SERVER_CA_NAME
+          value: "CA1"
         - name: FABRIC_CA_SERVER_CA_CERTFILE
-          value: /shared/crypto-config/ordererOrganizations/example.com/ca/ca.example.com-cert.pem
+          value: /shared/crypto-config/peerOrganizations/org1.example.com/ca/ca.org1.example.com-cert.pem
         - name: FABRIC_CA_SERVER_CA_KEYFILE
-          value: /shared/crypto-config/ordererOrganizations/example.com/ca/key.pem
+          value: /shared/crypto-config/peerOrganizations/org1.example.com/ca/key.pem
         - name: FABRIC_CA_SERVER_DEBUG
           value: "true"
         - name: FABRIC_CA_SERVER_TLS_ENABLED
