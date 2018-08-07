@@ -39,9 +39,9 @@ echo -e "\nCreating Copy artifacts job."
 echo "Running: kubectl create -f ${KUBECONFIG_FOLDER}/copyArtifactsJob.yaml"
 kubectl create -f ${KUBECONFIG_FOLDER}/copyArtifactsJob.yaml
 
-pod=$(kubectl get pods  --show-all --selector=job-name=copyartifacts --output=jsonpath={.items..metadata.name})
+pod=$(kubectl get pods --selector=job-name=copyartifacts --output=jsonpath={.items..metadata.name})
 
-podSTATUS=$(kubectl get pods  --show-all --selector=job-name=copyartifacts --output=jsonpath={.items..phase})
+podSTATUS=$(kubectl get pods --selector=job-name=copyartifacts --output=jsonpath={.items..phase})
 
 while [ "${podSTATUS}" != "Running" ]; do
     echo "Wating for container of copy artifact pod to run. Current status of ${pod} is ${podSTATUS}"
@@ -50,7 +50,7 @@ while [ "${podSTATUS}" != "Running" ]; do
         echo "There is an error in copyartifacts job. Please check logs."
         exit 1
     fi
-    podSTATUS=$(kubectl get pods --show-all --selector=job-name=copyartifacts --output=jsonpath={.items..phase})
+    podSTATUS=$(kubectl get pods --selector=job-name=copyartifacts --output=jsonpath={.items..phase})
 done
 
 echo -e "${pod} is now ${podSTATUS}"
@@ -65,7 +65,7 @@ JOBSTATUS=$(kubectl get jobs |grep "copyartifacts" |awk '{print $3}')
 while [ "${JOBSTATUS}" != "1" ]; do
     echo "Waiting for copyartifacts job to complete"
     sleep 1;
-    PODSTATUS=$(kubectl get pods --show-all| grep "copyartifacts" | awk '{print $3}')
+    PODSTATUS=$(kubectl get pods | grep "copyartifacts" | awk '{print $3}')
         if [ "${PODSTATUS}" == "Error" ]; then
             echo "There is an error in copyartifacts job. Please check logs."
             exit 1
@@ -84,13 +84,13 @@ JOBSTATUS=$(kubectl get jobs |grep utils|awk '{print $3}')
 while [ "${JOBSTATUS}" != "1" ]; do
     echo "Waiting for generateArtifacts job to complete"
     sleep 1;
-    # UTILSLEFT=$(kubectl get pods --show-all | grep utils | awk '{print $2}')
-    UTILSSTATUS=$(kubectl get pods --show-all | grep "utils" | awk '{print $3}')
+    # UTILSLEFT=$(kubectl get pods | grep utils | awk '{print $2}')
+    UTILSSTATUS=$(kubectl get pods | grep "utils" | awk '{print $3}')
     if [ "${UTILSSTATUS}" == "Error" ]; then
             echo "There is an error in utils job. Please check logs."
             exit 1
     fi
-    # UTILSLEFT=$(kubectl get pods --show-all | grep utils | awk '{print $2}')
+    # UTILSLEFT=$(kubectl get pods | grep utils | awk '{print $2}')
     JOBSTATUS=$(kubectl get jobs |grep utils|awk '{print $3}')
 done
 
@@ -128,7 +128,7 @@ JOBSTATUS=$(kubectl get jobs |grep createchannel |awk '{print $3}')
 while [ "${JOBSTATUS}" != "1" ]; do
     echo "Waiting for createchannel job to be completed"
     sleep 1;
-    if [ "$(kubectl get pods --show-all| grep createchannel | awk '{print $3}')" == "Error" ]; then
+    if [ "$(kubectl get pods | grep createchannel | awk '{print $3}')" == "Error" ]; then
         echo "Create Channel Failed"
         exit 1
     fi
@@ -146,7 +146,7 @@ JOBSTATUS=$(kubectl get jobs |grep joinchannel |awk '{print $3}')
 while [ "${JOBSTATUS}" != "1" ]; do
     echo "Waiting for joinchannel job to be completed"
     sleep 1;
-    if [ "$(kubectl get pods --show-all| grep joinchannel | awk '{print $3}')" == "Error" ]; then
+    if [ "$(kubectl get pods | grep joinchannel | awk '{print $3}')" == "Error" ]; then
         echo "Join Channel Failed"
         exit 1
     fi
@@ -164,7 +164,7 @@ JOBSTATUS=$(kubectl get jobs |grep chaincodeinstall |awk '{print $3}')
 while [ "${JOBSTATUS}" != "1" ]; do
     echo "Waiting for chaincodeinstall job to be completed"
     sleep 1;
-    if [ "$(kubectl get pods --show-all| grep chaincodeinstall | awk '{print $3}')" == "Error" ]; then
+    if [ "$(kubectl get pods | grep chaincodeinstall | awk '{print $3}')" == "Error" ]; then
         echo "Chaincode Install Failed"
         exit 1
     fi
@@ -182,7 +182,7 @@ JOBSTATUS=$(kubectl get jobs |grep chaincodeinstantiate |awk '{print $3}')
 while [ "${JOBSTATUS}" != "1" ]; do
     echo "Waiting for chaincodeinstantiate job to be completed"
     sleep 1;
-    if [ "$(kubectl get pods --show-all| grep chaincodeinstantiate | awk '{print $3}')" == "Error" ]; then
+    if [ "$(kubectl get pods | grep chaincodeinstantiate | awk '{print $3}')" == "Error" ]; then
         echo "Chaincode Instantiation Failed"
         exit 1
     fi

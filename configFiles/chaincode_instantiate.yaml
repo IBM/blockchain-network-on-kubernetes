@@ -17,7 +17,7 @@ spec:
 
       containers:
       - name: chaincodeinstantiate
-        image: hyperledger/fabric-tools:x86_64-1.0.4
+        image: hyperledger/fabric-tools:x86_64-1.1.0
         imagePullPolicy: Always
         command: ["sh", "-c", "peer chaincode instantiate -o blockchain-orderer:31010 -C ${CHANNEL_NAME} -n ${CHAINCODE_NAME} -v ${CHAINCODE_VERSION} -c '{\"Args\":[\"init\",\"a\",\"100\",\"b\",\"200\"]}'"]
         env:

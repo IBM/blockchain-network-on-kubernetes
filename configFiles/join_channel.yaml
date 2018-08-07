@@ -16,7 +16,7 @@ spec:
           claimName: shared-pvc
       containers:
       - name: joinchannel1
-        image: hyperledger/fabric-peer:x86_64-1.0.4
+        image: hyperledger/fabric-peer:x86_64-1.1.0
         imagePullPolicy: Always
         command: ["sh", "-c", "peer channel fetch newest -o ${ORDERER_URL} -c ${CHANNEL_NAME} && peer channel join -b ${CHANNEL_NAME}_newest.block "]
         env:
@@ -45,7 +45,7 @@ spec:
           name: sharedvolume
 
       - name: joinchannel2
-        image: hyperledger/fabric-peer:x86_64-1.0.4
+        image: hyperledger/fabric-peer:x86_64-1.1.0
         imagePullPolicy: Always
         command: ["sh", "-c", "peer channel fetch newest -o ${ORDERER_URL} -c ${CHANNEL_NAME} && peer channel join -b ${CHANNEL_NAME}_newest.block "]
         env:
@@ -74,7 +74,7 @@ spec:
           name: sharedvolume
 
       - name: joinchannel3
-        image: hyperledger/fabric-peer:x86_64-1.0.4
+        image: hyperledger/fabric-peer:x86_64-1.1.0
         imagePullPolicy: Always
         command: ["sh", "-c", "peer channel fetch newest -o ${ORDERER_URL} -c ${CHANNEL_NAME} && peer channel join -b ${CHANNEL_NAME}_newest.block "]
         env:
@@ -103,7 +103,7 @@ spec:
           name: sharedvolume
 
       - name: joinchannel4
-        image: hyperledger/fabric-peer:x86_64-1.0.4
+        image: hyperledger/fabric-peer:x86_64-1.1.0
         imagePullPolicy: Always
         command: ["sh", "-c", "peer channel fetch newest -o ${ORDERER_URL} -c ${CHANNEL_NAME} && peer channel join -b ${CHANNEL_NAME}_newest.block "]
         env:

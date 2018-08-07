@@ -16,7 +16,7 @@ spec:
           claimName: shared-pvc
       containers:
       - name: chaincodeinstall1
-        image: hyperledger/fabric-tools:x86_64-1.0.4
+        image: hyperledger/fabric-tools:x86_64-1.1.0
         imagePullPolicy: Always
         command: ["sh", "-c", "echo $GOPATH; cp -r /shared/artifacts/chaincode $GOPATH/src/; ls $GOPATH/src; peer chaincode install -n ${CHAINCODE_NAME} -v ${CHAINCODE_VERSION} -p chaincode_example02/"]
         env:
@@ -39,7 +39,7 @@ spec:
           name: sharedvolume
 
       - name: chaincodeinstall2
-        image: hyperledger/fabric-tools:x86_64-1.0.4
+        image: hyperledger/fabric-tools:x86_64-1.1.0
         imagePullPolicy: Always
         command: ["sh", "-c", "echo $GOPATH; cp -r /shared/artifacts/chaincode $GOPATH/src/; ls $GOPATH/src; peer chaincode install -n ${CHAINCODE_NAME} -v ${CHAINCODE_VERSION} -p chaincode_example02/"]
         env:
@@ -62,7 +62,7 @@ spec:
           name: sharedvolume
 
       - name: chaincodeinstall3
-        image: hyperledger/fabric-tools:x86_64-1.0.4
+        image: hyperledger/fabric-tools:x86_64-1.1.0
         imagePullPolicy: Always
         command: ["sh", "-c", "echo $GOPATH; cp -r /shared/artifacts/chaincode $GOPATH/src/; ls $GOPATH/src; peer chaincode install -n ${CHAINCODE_NAME} -v ${CHAINCODE_VERSION} -p chaincode_example02/"]
         env:
@@ -85,7 +85,7 @@ spec:
           name: sharedvolume
 
       - name: chaincodeinstall4
-        image: hyperledger/fabric-tools:x86_64-1.0.4
+        image: hyperledger/fabric-tools:x86_64-1.1.0
         imagePullPolicy: Always
         command: ["sh", "-c", "echo $GOPATH; cp -r /shared/artifacts/chaincode $GOPATH/src/; ls $GOPATH/src; peer chaincode install -n ${CHAINCODE_NAME} -v ${CHAINCODE_VERSION} -p chaincode_example02/"]
         env:
