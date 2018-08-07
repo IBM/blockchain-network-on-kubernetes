@@ -68,6 +68,7 @@ Follow these steps to setup and run this code pattern.
 4. [Deploy Hyperledger Fabric Network into Kubernetes Cluster](#4-deploy-hyperledger-fabric-network-into-kubernetes-cluster)
 5. [Test the deployed network](#5-test-the-deployed-network)
 6. [View the Kubernetes Dashboard](#6-view-the-kubernetes-dashboard)
+7. [Connect the network using client SDK](#7-connect-the-network-using-client-sdk)
 
 ### 1. Create a Kubernetes Cluster on IBM Cloud
 
@@ -232,6 +233,32 @@ Provide the token and `SIGN-IN`. In the Workloads tab, you can see the resources
   ![](images/kubernetes-dashboard.png)
 
 The hyperledger fabric network is ready to use. You can start developing your blockchain applications using node sdk or hyperledger composer for this deployed network.
+
+### 7. Connect the network using client SDK
+
+To develop your blockchain application on this deployed network, you need to connect to this network using client SDK. To connect to the network:
+
+* Get the public IP of your kubernetes cluster from IBM Cloud Dashboard.
+* Connect using this public IP and the ports exposed using [services](https://github.com/IBM/blockchain-network-on-kubernetes/blob/master/configFiles/blockchain-services.yaml). 
+For example: The node port for CA is `30054` hence CA Client url will be `http://< public IP of your cluster >:30054/`
+
+In this way, the CA client can be created as:
+
+  ```
+  fabric_ca_client = new Fabric_CA_Client('http://< public IP of your cluster >:30054/', tlsOptions , 'CA1', crypto_suite);
+  ```
+Similarily the following code can be used to setup the fabric network.
+
+  ```
+  // setup the fabric network
+  var fabric_client = new Fabric_Client();
+  
+  var channel = fabric_client.newChannel('channel1');
+  var peer = fabric_client.newPeer('grpc://< public IP of your cluster >:30110');
+  channel.addPeer(peer);
+  var order = fabric_client.newOrderer('grpc://< public IP of your cluster >:31010')
+  channel.addOrderer(order);
+  ```
 
 ## Troubleshooting
 
