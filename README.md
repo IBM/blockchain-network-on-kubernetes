@@ -268,7 +268,6 @@ Similarily the following code can be used to setup the fabric network.
 
 * [Hyperledger Fabric](https://hyperledger-fabric.readthedocs.io/en/release-1.1/)
 * [Kubernetes Concepts](https://kubernetes.io/docs/concepts/)
-* [IBM Blockchain Platform on IBM Container Service](https://github.com/IBM-Blockchain/ibm-container-service/)
 
 ## License
 
