@@ -7,15 +7,15 @@
 Blockchain is a shared, immutable ledger for recording the history of transactions. The Linux Foundation’s Hyperledger Fabric, the software implementation of blockchain IBM is committed to, is a permissioned network. For developing any blockchain use-case, the very first thing is to have a development environment for Hyperledger Fabric to create and deploy the application. Hyperledger Fabric network can be setup in multiple ways. 
 * [Hyperledger Fabric network On-Premise](http://hyperledger-fabric.readthedocs.io/en/release-1.0/build_network.html)
 * Using [Blockchain as a service](https://console.bluemix.net/catalog/services/blockchain) hosted on [IBM Cloud](https://console.bluemix.net/). IBM Cloud provides you Blockchain as a service with a Starter Membership Plan and Enterprise Membership Plan.
-* Hyperledger Fabric network using [Kubernetes APIs]((https://console.bluemix.net/containers-kubernetes/catalog/cluster)) on [IBM Cloud Container Service](https://console.bluemix.net/containers-kubernetes/catalog/cluster)
+* Hyperledger Fabric network using [Kubernetes APIs]((https://console.bluemix.net/containers-kubernetes/catalog/cluster)) on [IBM Cloud Kubernetes Service](https://console.bluemix.net/containers-kubernetes/catalog/cluster)
 
-This code pattern demonstrates the steps involved in setting up your business network on **Hyperledger Fabric using Kubernetes APIs on IBM Cloud Container Service**. 
+This code pattern demonstrates the steps involved in setting up your business network on **Hyperledger Fabric using Kubernetes APIs on IBM Cloud Kubernetes Service**.
 
 Hosting the Hyperledger Fabric network on IBM Cloud provides you many benefits like multiple users can work on the same setup, the setup can be used for different blockchain applications, the setup can be reused and so on. Please note that the blockchain network setup on Kubernetes is good to use for demo scenarios but for production, it is recommended to use IBM Blockchain as a service hosted on IBM Cloud.
 
 #### Kubernetes Cluster
 
-[IBM Cloud Container Service](https://console.bluemix.net/containers-kubernetes/catalog/cluster) allows you to create a free cluster that comes with 2 CPUs, 4 GB memory, and 1 worker node. It allows you to get familiar with and test Kubernetes capabilities. However they lack capabilities like persistent NFS file-based storage with volumes.
+[IBM Cloud Kubernetes Service](https://console.bluemix.net/containers-kubernetes/catalog/cluster) allows you to create a free cluster that comes with 2 CPUs, 4 GB memory, and 1 worker node. It allows you to get familiar with and test Kubernetes capabilities. However they lack capabilities like persistent NFS file-based storage with volumes.
 
 To setup your cluster for maximum availability and capacity, IBM Cloud allows you to create a fully customizable, production-ready cluster called _standard cluster_. _Standard clusters_ allow highly available cluster configurations such as a setup with two clusters that run in different regions, each with multiple worker nodes. Please see https://console.bluemix.net/docs/containers/cs_planning.html#cs_planning_cluster_config to review other options for highly available cluster configurations.
 
@@ -30,7 +30,7 @@ When the reader has completed this pattern, they will understand how to:
 
   ![](images/architecture.png)
 
-1. Log in to IBM Cloud CLI and initialize IBM Cloud Container Service plugin.
+1. Log in to IBM Cloud CLI and initialize IBM Cloud Kubernetes Service plugin.
 2. Set context for Kubernetes cluster using CLI and download Kubernetes configuration files. After downloading configuration files, set KUBECONFIG environment variable.
 3. Run script to deploy your hyperledger fabric network on Kubernetes cluster.
 4. Access Kubernetes dashboard.
@@ -39,7 +39,7 @@ When the reader has completed this pattern, they will understand how to:
 
 * [Hyperledger Fabric](https://hyperledger-fabric.readthedocs.io/): Hyperledger Fabric is a platform for distributed ledger solutions underpinned by a modular architecture delivering high degrees of confidentiality, resiliency, flexibility and scalability.
 
-* [IBM Cloud Container Service](https://console.bluemix.net/containers-kubernetes/catalog/cluster): IBM Container Service enables the orchestration of intelligent scheduling, self-healing, and horizontal scaling.
+* [IBM Cloud Kubernetes Service](https://console.bluemix.net/containers-kubernetes/catalog/cluster): IBM Kubernetes Service enables the orchestration of intelligent scheduling, self-healing, and horizontal scaling.
 
 ## Featured technologies
 
@@ -72,7 +72,7 @@ Follow these steps to setup and run this code pattern.
 
 ### 1. Create a Kubernetes Cluster on IBM Cloud
 
-* Create a Kubernetes cluster with [IBM Cloud Container Service](https://console.bluemix.net/containers-kubernetes/catalog/cluster) using GUI. This pattern uses the _free cluster_.
+* Create a Kubernetes cluster with [IBM Cloud Kubernetes Service](https://console.bluemix.net/containers-kubernetes/catalog/cluster) using GUI. This pattern uses the _free cluster_.
 
   ![](images/create-service.png)
   
@@ -85,7 +85,7 @@ Follow these steps to setup and run this code pattern.
 
 * Install [Kubernetes CLI](https://kubernetes.io/docs/tasks/tools/install-kubectl/). The prefix for running commands by using the Kubernetes CLI is `kubectl`.
 
-* Install the container service plugin using the following command.
+* Install the kubernetes service plugin using the following command.
   ```
   bx plugin install container-service -r Bluemix
   ```
@@ -141,6 +141,19 @@ In the source directory,
 
 If there is any change in network topology, need to modify the configuration files (.yaml files) appropriately. The configuration files are located in `artifacts` and `configFiles` directory. For example, if you decide to increase/decrease the capacity of persistant volume then you need to modify `createVolume.yaml`.  
 
+If the Kubernetes' Server version is **v1.11.x** or above, the cluster may be using `containerd` as its container runtime therefore using `docker.sock` of the worker node is not possible. You could deploy and use a Docker daemon in a container.
+> In IKS v1.11.x and above, it is using `containerd`
+
+Modify the `configFiles/peersDeployment.yaml` file to point to a Docker service. Change instances of `unix:///host/var/run/docker.sock` to `tcp://docker:2375` with a text editor or use the commands below.
+
+```
+## macOS
+$ sed -i '' s#unix:///host/var/run/docker.sock#tcp://docker:2375# configFiles/peersDeployment.yaml
+
+## Linux
+$ sed -i s#unix:///host/var/run/docker.sock#tcp://docker:2375# configFiles/peersDeployment.yaml
+```
+
 #### Run the script to deploy your Hyperledger Fabric Network
 
 Once you have completed the changes (if any) in configuration files, you are ready to deploy your network. Execute the script to deploy your hyperledger fabric network.
@@ -149,6 +162,8 @@ Once you have completed the changes (if any) in configuration files, you are rea
   $ chmod +x setup_blockchainNetwork.sh
   $ ./setup_blockchainNetwork.sh
   ```
+
+  > If you are using a Standard IKS cluster with multiple workers nodes, do `./setup_blockchainNetwork.sh --paid` so that the shared volume of the blockchain containers would work properly.
 
 Note: Before running the script, please check your environment. You should able to run `kubectl commands` properly with your cluster as explained in step 3. 
 
