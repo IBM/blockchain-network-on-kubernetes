@@ -9,5 +9,5 @@ spec:
     - ReadWriteMany
   resources:
     requests:
-      storage: 20Gi
-  storageClassName: "ibmc-file-bronze"
+      storage: 5Gi
+  storageClassName: managed-premium
