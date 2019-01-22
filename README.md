@@ -52,11 +52,11 @@ When the reader has completed this pattern, they will understand how to:
 [![](https://img.youtube.com/vi/DFYk6XaMHc0/0.jpg)](https://youtu.be/DFYk6XaMHc0)
 
 ## Kubernetes Concepts Used
-* [Kubernetes Pods](https://kubernetes.io/docs/home//concepts/workloads/pods/pod/) - Pods represent the smallest deployable units in a Kubernetes cluster and are used to group containers that must be treated as a single unit.
-* [Kubernetes Jobs](https://kubernetes.io/docs/home//concepts/workloads/controllers/jobs-run-to-completion/) - A job creates one or more pods and ensures that a specified number of them successfully terminate. As pods successfully complete, the job tracks the successful completions.
-* [Kubernetes Deployment](https://kubernetes.io/docs/home//concepts/workloads/controllers/deployment/) - A deployment is a Kubernetes resource where you specify your containers and other Kubernetes resources that are required to run your app, such as persistent storage, services, or annotations.
-* [Kubernetes Services](https://kubernetes.io/docs/home//concepts/services-networking/service/) - A Kubernetes service groups a set of pods and provides network connection to these pods for other services in the cluster without exposing the actual private IP address of each pod.
-* [Kubernetes Persistent Volumes (PV)](https://kubernetes.io/docs/home//concepts/storage/persistent-volumes/) - PersistentVolumes are a way for users to *claim* durable storage such as NFS file storage.
+* [Kubernetes Pods](https://kubernetes.io/docs/concepts/workloads/pods/pod/) - Pods represent the smallest deployable units in a Kubernetes cluster and are used to group containers that must be treated as a single unit.
+* [Kubernetes Jobs](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/) - A job creates one or more pods and ensures that a specified number of them successfully terminate. As pods successfully complete, the job tracks the successful completions.
+* [Kubernetes Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) - A deployment is a Kubernetes resource where you specify your containers and other Kubernetes resources that are required to run your app, such as persistent storage, services, or annotations.
+* [Kubernetes Services](https://kubernetes.io/docs/concepts/services-networking/service/) - A Kubernetes service groups a set of pods and provides network connection to these pods for other services in the cluster without exposing the actual private IP address of each pod.
+* [Kubernetes Persistent Volumes (PV)](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) - PersistentVolumes are a way for users to *claim* durable storage such as NFS file storage.
 
 ## Steps
 
@@ -83,7 +83,7 @@ Follow these steps to setup and run this code pattern.
 
 * Install [IBM Cloud CLI](https://cloud.ibm.com/docs/cli/reference/bluemix_cli/get_started.html#getting-started). The prefix for running commands by using the Bluemix CLI is `bx`.
 
-* Install [Kubernetes CLI](https://kubernetes.io/docs/home//tasks/tools/install-kubectl/). The prefix for running commands by using the Kubernetes CLI is `kubectl`.
+* Install [Kubernetes CLI](https://kubernetes.io/docs/tasks/tools/install-kubectl/). The prefix for running commands by using the Kubernetes CLI is `kubectl`.
 
 * Install the kubernetes service plugin using the following command.
   ```
@@ -282,7 +282,7 @@ Similarily the following code can be used to setup the fabric network.
 ## Reference Links
 
 * [Hyperledger Fabric](https://hyperledger-fabric.readthedocs.io/en/release-1.1/)
-* [Kubernetes Concepts](https://kubernetes.io/docs/home//concepts/)
+* [Kubernetes Concepts](https://kubernetes.io/docs/concepts/)
 
 ## License
 
