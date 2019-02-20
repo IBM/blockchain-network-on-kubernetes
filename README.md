@@ -139,7 +139,7 @@ In the source directory,
 
 #### Modify the Kubernetes configuration scripts
 
-If there is any change in network topology, need to modify the configuration files (.yaml files) appropriately. The configuration files are located in `artifacts` and `configFiles` directory. For example, if you decide to increase/decrease the capacity of persistant volume then you need to modify `createVolume.yaml`.
+If there is any change in network topology, need to modify the configuration files (.yaml files) appropriately. The configuration files are located in `artifacts` and `configFiles` directory. For example, if you decide to increase/decrease the capacity of persistent volume then you need to modify `createVolume.yaml`.
 
 If the Kubernetes' Server version is **v1.11.x** or above, the cluster may be using `containerd` as its container runtime therefore using `docker.sock` of the worker node is not possible. You could deploy and use a Docker daemon in a container.
 > In IKS v1.11.x and above, it is using `containerd`
