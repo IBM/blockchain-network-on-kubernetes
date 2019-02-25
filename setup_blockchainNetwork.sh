@@ -41,9 +41,16 @@ if [ "$(kubectl get pvc | grep shared-pvc | awk '{print $2}')" != "Bound" ]; the
         kubectl create -f ${KUBECONFIG_FOLDER}/createVolume-paid.yaml
         sleep 5
     else
-        echo "Running: kubectl create -f ${KUBECONFIG_FOLDER}/createVolume.yaml"
-        kubectl create -f ${KUBECONFIG_FOLDER}/createVolume.yaml
-        sleep 5
+        if [ "$1" == "--azure" ]; then
+            echo "You passed argument --azure. Make sure you have an Azure Kubernetes Cluster. Else, remove --azure option"
+            echo "Running: kubectl create -f ${KUBECONFIG_FOLDER}/createVolume-azure.yaml"
+            kubectl create -f ${KUBECONFIG_FOLDER}/createVolume-azure.yaml
+            sleep 5
+        else
+            echo "Running: kubectl create -f ${KUBECONFIG_FOLDER}/createVolume.yaml"
+            kubectl create -f ${KUBECONFIG_FOLDER}/createVolume.yaml
+            sleep 5
+        fi
     fi
 
     if [ "kubectl get pvc | grep shared-pvc | awk '{print $3}'" != "shared-pv" ]; then
