@@ -156,7 +156,27 @@ $ sed -i s#unix:///host/var/run/docker.sock#tcp://docker:2375# configFiles/peers
 
 #### Run the script to deploy your Hyperledger Fabric Network
 
-Once you have completed the changes (if any) in configuration files, you are ready to deploy your network. Execute the script to deploy your hyperledger fabric network.
+Once you have completed the changes (if any) in configuration files, you are ready to deploy your network. 
+
+Check your kubectl CLI version as:
+
+```
+$ kubectl version --short
+```
+
+This command will give you `Client Version` and `Server Version`. 
+If the `Client version > v1.11.x` i.e. 1.12.x or more then use `setup_blockchainNetwork_v2.sh` to set up the network. Run the following command:
+
+```
+cp setup_blockchainNetwork_v2.sh setup_blockchainNetwork.sh
+```
+
+If the `Client version <= v1.11.x` then use `setup_blockchainNetwork_v1.sh` to setup the network. Copy the script as shown.
+```
+cp setup_blockchainNetwork_v1.sh setup_blockchainNetwork.sh
+```
+
+Now execute the script to deploy your hyperledger fabric network.
 
   ```
   $ chmod +x setup_blockchainNetwork.sh
