@@ -17,7 +17,7 @@ spec:
 
       containers:
       - name: orderer
-        image: hyperledger/fabric-orderer:1.2.1
+        image: hyperledger/fabric-orderer:1.4
         command: ["sh", "-c", "sleep 5 && while [ ! -f /shared/status_configtxgen_complete ]; do echo Waiting for configtxgen; sleep 1; done; orderer"]
         env:
         - name: ORDERER_CFG_PATH
@@ -77,7 +77,7 @@ spec:
 
       containers:
       - name: ca
-        image: hyperledger/fabric-ca:1.2.1
+        image: hyperledger/fabric-ca:1.4
         command: ["sh", "-c", "sleep 1 && while [ ! -f /shared/status_configtxgen_complete ]; do echo Waiting for configtxgen; sleep 1; done; fabric-ca-server start -b admin:adminpw -d"]
         env:
         - name: FABRIC_CA_SERVER_CA_NAME
@@ -122,7 +122,7 @@ spec:
 
       containers:
       - name: org1peer1
-        image: hyperledger/fabric-peer:1.2.1
+        image: hyperledger/fabric-peer:1.4
         command: ["sh", "-c", "sleep 1 && while [ ! -f /shared/status_configtxgen_complete ]; do echo Waiting for configtxgen; sleep 1; done; peer node start"]
         env:
         - name: CORE_PEER_ADDRESSAUTODETECT
@@ -148,12 +148,12 @@ spec:
         - name: CORE_PEER_PROFILE_ENABLED
           value: "true"
         - name: CORE_VM_ENDPOINT
-          value: unix:///host/var/run/docker.sock
+          value: tcp://docker:2375
         - name: CORE_PEER_LOCALMSPID
           value: Org1MSP
         - name: CORE_PEER_MSPCONFIGPATH
           value: /shared/crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/msp/
-        - name: CORE_LOGGING_LEVEL
+        - name: FABRIC_LOGGING_SPEC
           value: debug
         - name: CORE_LOGGING_PEER
           value: debug
@@ -208,7 +208,7 @@ spec:
 
       containers:
       - name: org2peer1
-        image: hyperledger/fabric-peer:1.2.1
+        image: hyperledger/fabric-peer:1.4
         command: ["sh", "-c", "sleep 1 && while [ ! -f /shared/status_configtxgen_complete ]; do echo Waiting for configtxgen; sleep 1; done;  peer node start"]
         env:
         - name: CORE_PEER_ADDRESSAUTODETECT
@@ -234,12 +234,12 @@ spec:
         - name: CORE_PEER_PROFILE_ENABLED
           value: "true"
         - name: CORE_VM_ENDPOINT
-          value: unix:///host/var/run/docker.sock
+          value: tcp://docker:2375
         - name: CORE_PEER_LOCALMSPID
           value: Org2MSP
         - name: CORE_PEER_MSPCONFIGPATH
           value: /shared/crypto-config/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/msp/
-        - name: CORE_LOGGING_LEVEL
+        - name: FABRIC_LOGGING_SPEC
           value: debug
         - name: CORE_LOGGING_PEER
           value: debug
@@ -295,7 +295,7 @@ spec:
 
       containers:
       - name: org3peer1
-        image: hyperledger/fabric-peer:1.2.1
+        image: hyperledger/fabric-peer:1.4
         command: ["sh", "-c", "sleep 1 && while [ ! -f /shared/status_configtxgen_complete ]; do echo Waiting for configtxgen; sleep 1; done;  peer node start"]
         env:
         - name: CORE_PEER_ADDRESSAUTODETECT
@@ -321,12 +321,12 @@ spec:
         - name: CORE_PEER_PROFILE_ENABLED
           value: "true"
         - name: CORE_VM_ENDPOINT
-          value: unix:///host/var/run/docker.sock
+          value: tcp://docker:2375
         - name: CORE_PEER_LOCALMSPID
           value: Org3MSP
         - name: CORE_PEER_MSPCONFIGPATH
           value: /shared/crypto-config/peerOrganizations/org3.example.com/peers/peer0.org3.example.com/msp/
-        - name: CORE_LOGGING_LEVEL
+        - name: FABRIC_LOGGING_SPEC
           value: debug
         - name: CORE_LOGGING_PEER
           value: debug
@@ -382,7 +382,7 @@ spec:
 
       containers:
       - name: org4peer1
-        image: hyperledger/fabric-peer:1.2.1
+        image: hyperledger/fabric-peer:1.4
         command: ["sh", "-c", "sleep 1 && while [ ! -f /shared/status_configtxgen_complete ]; do echo Waiting for configtxgen; sleep 1; done;  peer node start"]
         env:
         - name: CORE_PEER_ADDRESSAUTODETECT
@@ -408,12 +408,12 @@ spec:
         - name: CORE_PEER_PROFILE_ENABLED
           value: "true"
         - name: CORE_VM_ENDPOINT
-          value: unix:///host/var/run/docker.sock
+          value: tcp://docker:2375
         - name: CORE_PEER_LOCALMSPID
           value: Org4MSP
         - name: CORE_PEER_MSPCONFIGPATH
           value: /shared/crypto-config/peerOrganizations/org4.example.com/peers/peer0.org4.example.com/msp/
-        - name: CORE_LOGGING_LEVEL
+        - name: FABRIC_LOGGING_SPEC
           value: debug
         - name: CORE_LOGGING_PEER
           value: debug
