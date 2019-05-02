@@ -16,7 +16,7 @@ spec:
           claimName: shared-pvc
       containers:
       - name: createchanneltx
-        image: hyperledger/fabric-tools:1.2.1
+        image: hyperledger/fabric-tools:1.4
         imagePullPolicy: Always
         command: ["sh", "-c", "cd /shared && pwd && ls && export FABRIC_CFG_PATH=$PWD && configtxgen -profile FourOrgsChannel -outputCreateChannelTx ${CHANNEL_NAME}.tx -channelID ${CHANNEL_NAME} && touch /shared/status_channeltx_complete "]
         env:
@@ -29,7 +29,7 @@ spec:
           name: sharedvolume
 
       - name: createchannel
-        image: hyperledger/fabric-peer:1.2.1
+        image: hyperledger/fabric-peer:1.4
         imagePullPolicy: Always
         command: ["sh", "-c", "while [ ! -f /shared/status_channeltx_complete ]; do echo Waiting for channeltx; sleep 2; done; peer channel create -o ${ORDERER_URL} -c ${CHANNEL_NAME} -f /shared/${CHANNEL_NAME}.tx && rm /shared/status_channeltx_complete && touch /shared/status_channelcreate_complete"]
         env:
@@ -45,7 +45,7 @@ spec:
           value: Org1MSP
         - name: CORE_PEER_MSPCONFIGPATH
           value: /shared/crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/msp/
-        - name: CORE_LOGGING_LEVEL
+        - name: FABRIC_LOGGING_SPEC
           value: debug
         - name: FABRIC_CFG_PATH
           value: /etc/hyperledger/fabric

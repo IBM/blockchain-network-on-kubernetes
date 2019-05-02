@@ -16,7 +16,7 @@ spec:
           claimName: shared-pvc
       containers:
       - name: joinchannel1
-        image: hyperledger/fabric-peer:1.2.1
+        image: hyperledger/fabric-peer:1.4
         imagePullPolicy: Always
         command: ["sh", "-c", "peer channel fetch newest -o ${ORDERER_URL} -c ${CHANNEL_NAME} && peer channel join -b ${CHANNEL_NAME}_newest.block "]
         env:
@@ -32,7 +32,7 @@ spec:
           value: Org1MSP
         - name: CORE_PEER_MSPID
           value: Org1MSP
-        - name: CORE_LOGGING_LEVEL
+        - name: FABRIC_LOGGING_SPECL
           value: debug
         - name: CORE_PEER_MSPCONFIGPATH
           value: /shared/crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp
@@ -45,7 +45,7 @@ spec:
           name: sharedvolume
 
       - name: joinchannel2
-        image: hyperledger/fabric-peer:1.2.1
+        image: hyperledger/fabric-peer:1.4
         imagePullPolicy: Always
         command: ["sh", "-c", "peer channel fetch newest -o ${ORDERER_URL} -c ${CHANNEL_NAME} && peer channel join -b ${CHANNEL_NAME}_newest.block "]
         env:
@@ -61,7 +61,7 @@ spec:
           value: Org2MSP
         - name: CORE_PEER_MSPID
           value: Org2MSP
-        - name: CORE_LOGGING_LEVEL
+        - name: FABRIC_LOGGING_SPEC
           value: debug
         - name: CORE_PEER_MSPCONFIGPATH
           value: /shared/crypto-config/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp
@@ -74,7 +74,7 @@ spec:
           name: sharedvolume
 
       - name: joinchannel3
-        image: hyperledger/fabric-peer:1.2.1
+        image: hyperledger/fabric-peer:1.4
         imagePullPolicy: Always
         command: ["sh", "-c", "peer channel fetch newest -o ${ORDERER_URL} -c ${CHANNEL_NAME} && peer channel join -b ${CHANNEL_NAME}_newest.block "]
         env:
@@ -90,7 +90,7 @@ spec:
           value: Org3MSP
         - name: CORE_PEER_MSPID
           value: Org3MSP
-        - name: CORE_LOGGING_LEVEL
+        - name: FABRIC_LOGGING_SPEC
           value: debug
         - name: CORE_PEER_MSPCONFIGPATH
           value: /shared/crypto-config/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp
@@ -103,7 +103,7 @@ spec:
           name: sharedvolume
 
       - name: joinchannel4
-        image: hyperledger/fabric-peer:1.2.1
+        image: hyperledger/fabric-peer:1.4
         imagePullPolicy: Always
         command: ["sh", "-c", "peer channel fetch newest -o ${ORDERER_URL} -c ${CHANNEL_NAME} && peer channel join -b ${CHANNEL_NAME}_newest.block "]
         env:
@@ -119,7 +119,7 @@ spec:
           value: Org4MSP
         - name: CORE_PEER_MSPID
           value: Org4MSP
-        - name: CORE_LOGGING_LEVEL
+        - name: FABRIC_LOGGING_SPEC
           value: debug
         - name: CORE_PEER_MSPCONFIGPATH
           value: /shared/crypto-config/peerOrganizations/org4.example.com/users/Admin@org4.example.com/msp
