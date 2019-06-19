@@ -91,11 +91,9 @@ Follow these steps to setup and run this code pattern.
 
 * Install [Kubernetes CLI](https://kubernetes.io/docs/tasks/tools/install-kubectl/). The prefix for running commands by using the Kubernetes CLI is `kubectl`.
 
-* Install the kubernetes service plugin using the following command.
+* Install the kubernetes service plugin using the following command
+`ibmcloud plugin install container-service -r Bluemix`
 
-  ```
-ibmcloud plugin install container-service -r Bluemix
-  ```
 
 ### 3. Gain access to your Kubernetes Cluster
 
