@@ -6,18 +6,18 @@
 
 Blockchain is a shared, immutable ledger for recording the history of transactions. The Linux Foundation’s Hyperledger Fabric, the software implementation of blockchain IBM is committed to, is a permissioned network. For developing any blockchain use-case, the very first thing is to have a development environment for Hyperledger Fabric to create and deploy the application. Hyperledger Fabric network can be setup in multiple ways.
 * [Hyperledger Fabric network On-Premise](https://hyperledger-fabric.readthedocs.io/en/release-1.0/build_network.html)
-* Using [Blockchain as a service](https://cloud.ibm.com/catalog/services/blockchain) hosted on [IBM Cloud](https://cloud.ibm.com/). IBM Cloud provides you Blockchain as a service with a Starter Membership Plan and Enterprise Membership Plan.
+* Using [IBM Blockchain Platform](https://cloud.ibm.com/catalog/services/blockchain) hosted on [IBM Cloud](https://cloud.ibm.com/). IBM Cloud provides you Blockchain as a service.
 * Hyperledger Fabric network using [Kubernetes APIs]((https://cloud.ibm.com/containers-kubernetes/catalog/cluster)) on [IBM Cloud Kubernetes Service](https://cloud.ibm.com/containers-kubernetes/catalog/cluster)
 
 This code pattern demonstrates the steps involved in setting up your business network on **Hyperledger Fabric using Kubernetes APIs on IBM Cloud Kubernetes Service**.
 
-Hosting the Hyperledger Fabric network on IBM Cloud provides you many benefits like multiple users can work on the same setup, the setup can be used for different blockchain applications, the setup can be reused and so on. Please note that the blockchain network setup on Kubernetes is good to use for demo scenarios but for production, it is recommended to use IBM Blockchain as a service hosted on IBM Cloud.
+Hosting the Hyperledger Fabric network on IBM Cloud provides you many benefits like multiple users can work on the same setup, the setup can be used for different blockchain applications, the setup can be reused and so on. Please note that the blockchain network setup on Kubernetes is good to use for demo scenarios but for production, it is recommended to use IBM Blockchain Platform hosted on IBM Cloud.
 
 #### Kubernetes Cluster
 
 [IBM Cloud Kubernetes Service](https://cloud.ibm.com/containers-kubernetes/catalog/cluster) allows you to create a free cluster that comes with 2 CPUs, 4 GB memory, and 1 worker node. It allows you to get familiar with and test Kubernetes capabilities. However they lack capabilities like persistent NFS file-based storage with volumes.
 
-To setup your cluster for maximum availability and capacity, IBM Cloud allows you to create a fully customizable, production-ready cluster called _standard cluster_. _Standard clusters_ allow highly available cluster configurations such as a setup with two clusters that run in different regions, each with multiple worker nodes. Please see https://cloud.ibm.com/docs/containers/cs_planning.html#cs_planning_cluster_config to review other options for highly available cluster configurations.
+To setup your cluster for maximum availability and capacity, IBM Cloud allows you to create a fully customizable, production-ready cluster called _standard cluster_. _Standard clusters_ allow highly available cluster configurations such as a setup with two clusters that run in different regions, each with multiple worker nodes. Please see https://cloud.ibm.com/docs/containers?topic=containers-cs_ov#cluster_types to review other options for highly available cluster configurations.
 
 This pattern uses a _free cluster_ provided by IBM Cloud and it can be used for proof-of-concept purpose. This pattern provides you the scripts to automate the process for setting up Hyperledger Fabric network using Kubernetes APIs on IBM Cloud.
 
@@ -58,6 +58,12 @@ When the reader has completed this pattern, they will understand how to:
 * [Kubernetes Services](https://kubernetes.io/docs/concepts/services-networking/service/) - A Kubernetes service groups a set of pods and provides network connection to these pods for other services in the cluster without exposing the actual private IP address of each pod.
 * [Kubernetes Persistent Volumes (PV)](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) - PersistentVolumes are a way for users to *claim* durable storage such as NFS file storage.
 
+### Prerequisites
+
+- [IBM Cloud account](https://cloud.ibm.com/registration/?target=%2Fdashboard%2Fapps)
+- [Node v8.x or greater and npm v5.x or greater](https://nodejs.org/en/download/)
+
+
 ## Steps
 
 Follow these steps to setup and run this code pattern.
@@ -81,13 +87,13 @@ Follow these steps to setup and run this code pattern.
 
 ### 2. Setting up CLIs
 
-* Install [IBM Cloud CLI](https://cloud.ibm.com/docs/cli/reference/bluemix_cli/get_started.html#getting-started). The prefix for running commands by using the Bluemix CLI is `bx`.
+* Install [IBM Cloud CLI](https://cloud.ibm.com/docs/cli?topic=cloud-cli-install-ibmcloud-cli). The prefix for running commands by using the Bluemix CLI is `ibmcloud`.
 
 * Install [Kubernetes CLI](https://kubernetes.io/docs/tasks/tools/install-kubectl/). The prefix for running commands by using the Kubernetes CLI is `kubectl`.
 
 * Install the kubernetes service plugin using the following command.
   ```
-  bx plugin install container-service -r Bluemix
+ibmcloud plugin install container-service -r Bluemix
   ```
 
 ### 3. Gain access to your Kubernetes Cluster
@@ -95,7 +101,7 @@ Follow these steps to setup and run this code pattern.
   Access the [IBM Cloud Dashboard](https://cloud.ibm.com/dashboard/apps).  Choose the same cloud foundry org and cloud
   foundry space where cluster is created.
 
-  * Check the status of your cluster `IBM Cloud Dashboard -> <your cluster> -> Worker Nodes`. If status is not `ready`, then
+  * Check the status of your cluster `IBM Cloud Dashboard -> <your cluster> -> Worker Nodes`. If status is not `normal`, then
     you need to wait for some more time to proceed further.
 
     ![](images/cluster-status.png)
@@ -225,6 +231,8 @@ And the command to be used to exit from the peer container is:
   # exit
   ```
 
+**Note:** Stay logged into your peer to complete these commands.
+
 **Query**
 
 Chaincode was instantiated with the values as `{ a: 100, b: 200 }`. Let’s query to `org1peer1` for the value of `a` to make sure the chaincode was properly instantiated.
@@ -247,6 +255,10 @@ Let’s confirm that our previous invocation executed properly. We initialized t
 
 ### 6. View the Kubernetes Dashboard
 
+You have two ways you can access your Kubernetes Dashboard:
+
+1. Via Browser
+
 Obtain the token using the following command to authenticate for Kubernetes dashboard.
 
   ```
@@ -267,7 +279,14 @@ Provide the token and `SIGN-IN`. In the Workloads tab, you can see the resources
 
   ![](images/kubernetes-dashboard.png)
 
-The hyperledger fabric network is ready to use. You can start developing your blockchain applications using node sdk or hyperledger composer for this deployed network.
+2. Via the IBM Cloud dashboard
+
+ ![](images/kdashboardonibmcloud.png)
+
+When you click on the button entitled `Kubernetes Dashboard`, you will see the image above.
+
+
+The hyperledger fabric network is ready to use. You can start developing your blockchain applications using node sdk for this deployed network.
 
 ### 7. Connect the network using client SDK
 
@@ -282,7 +301,7 @@ In this way, the CA client can be created as:
   ```
   fabric_ca_client = new Fabric_CA_Client('http://< public IP of your cluster >:30054/', tlsOptions , 'CA1', crypto_suite);
   ```
-Similarily the following code can be used to setup the fabric network.
+Similarly the following code can be used to setup the fabric network.
 
   ```
   // setup the fabric network
