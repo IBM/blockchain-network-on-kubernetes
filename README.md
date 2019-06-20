@@ -254,36 +254,15 @@ Let’s confirm that our previous invocation executed properly. We initialized t
 
 ### 6. View the Kubernetes Dashboard
 
-You have two ways you can access your Kubernetes Dashboard:
+Go to the `IBM Cloud dashboard -> Kubernetes Cluster -> <Your cluster>` 
 
-1. Via Browser
+Click on the button entitled `Kubernetes Dashboard`, 
 
-Obtain the token using the following command to authenticate for Kubernetes dashboard.
+![](images/kdashboardonibmcloud.png)
 
-  ```
-  $ kubectl config view -o jsonpath='{.users[0].user.auth-provider.config.id-token}'
-  ```
+you will see the dashboard as shown.
 
-Copy the token. Launch your Kubernetes dashboard with the default port 8001.
-
-  ```
-  $ kubectl proxy
-  ```
-
-Open the URL http://localhost:8001/ui in a web browser to see the Kubernetes dashboard. It will prompt for the authentication.
-
-  ![](images/provide-token-for-dashboard.png)
-
-Provide the token and `SIGN-IN`. In the Workloads tab, you can see the resources that was created through scripts.
-
-  ![](images/kubernetes-dashboard.png)
-
-2. Via the IBM Cloud dashboard
-
- ![](images/kdashboardonibmcloud.png)
-
-When you click on the button entitled `Kubernetes Dashboard`, you will see the image above.
-
+![](images/kubernetes-dashboard.png)
 
 The hyperledger fabric network is ready to use. You can start developing your blockchain applications using node sdk for this deployed network.
 
@@ -295,7 +274,7 @@ To develop your blockchain application on this deployed network, you need to con
 * Connect using this public IP and the ports exposed using [services](https://github.com/IBM/blockchain-network-on-kubernetes/blob/master/configFiles/blockchain-services.yaml).
 For example: The node port for CA is `30054` hence CA Client url will be `http://< public IP of your cluster >:30054/`
 
-In this way, the CA client can be created as:
+In this way, the CA client using node SDK can be created as:
 
   ```
   fabric_ca_client = new Fabric_CA_Client('http://< public IP of your cluster >:30054/', tlsOptions , 'CA1', crypto_suite);
