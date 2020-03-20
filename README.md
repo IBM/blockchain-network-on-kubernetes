@@ -115,8 +115,8 @@ Follow these steps to setup and run this code pattern.
 
     ```
     $ kubectl version  --short
-    Client Version: v1.9.2
-    Server Version: v1.8.6-4+9c2a4c1ed1ee7e
+    Client Version: v1.14.6
+    Server Version: v1.16.8+IKS
     ```
 
 ### 4. Deploy Hyperledger Fabric Network into Kubernetes Cluster
