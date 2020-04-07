@@ -146,18 +146,7 @@ In the source directory,
 
 If there is any change in network topology, need to modify the configuration files (.yaml files) appropriately. The configuration files are located in `artifacts` and `configFiles` directory. For example, if you decide to increase/decrease the capacity of persistent volume then you need to modify `createVolume.yaml`.
 
-If the Kubernetes' Server version is **v1.11.x** or above, the cluster may be using `containerd` as its container runtime therefore using `docker.sock` of the worker node is not possible. You could deploy and use a Docker daemon in a container.
-> In IKS v1.11.x and above, it is using `containerd`
-
-Modify the `configFiles/peersDeployment.yaml` file to point to a Docker service. Change instances of `unix:///host/var/run/docker.sock` to `tcp://docker:2375` with a text editor or use the commands below.
-
-```
-## macOS
-$ sed -i '' s#unix:///host/var/run/docker.sock#tcp://docker:2375# configFiles/peersDeployment.yaml
-
-## Linux
-$ sed -i s#unix:///host/var/run/docker.sock#tcp://docker:2375# configFiles/peersDeployment.yaml
-```
+The Kubernetes Server version v1.11.x or above uses `containerd` as its container runtime therefore using `docker.sock` of the worker node is not possible. You need to deploy and use a Docker daemon in a container. In case, your Kubernetes server version is smaller than 1.11.x then you need to modify the `configFiles/peersDeployment.yaml` file to point to a Docker service. Change instances of `tcp://docker:2375` to `unix:///host/var/run/docker.sock` with a text editor.
 
 #### Run the script to deploy your Hyperledger Fabric Network
 
@@ -235,18 +224,28 @@ And the command to be used to exit from the peer container is:
 **Query**
 
 Chaincode was instantiated with the values as `{ a: 100, b: 200 }`. Let’s query to `org1peer1` for the value of `a` to make sure the chaincode was properly instantiated.
+  ```
+  peer chaincode query -C channel1 -n cc -c '{"Args":["query","a"]}'
+  ```
 
   ![](images/first-query.png)
 
 **Invoke**
 
 Now let’s submit a request to `org2peer1` to move 20 from `a` to `b`. A new transaction will be generated and upon successful completion of transaction, state will get updated.
+  ```
+  peer chaincode invoke -o blockchain-orderer:31010 -C channel1 -n cc -c '{"Args":["invoke","a","b","20"]}'
+  ```
 
   ![](images/invoke.png)
 
 **Query**
 
 Let’s confirm that our previous invocation executed properly. We initialized the key `a` with a value of 100 and just removed 20 with our previous invocation. Therefore, a query against `a` should show 80 and a query against `b` should show 220. Now issue the query request to `org3peer1` and `org4peer1` as shown.
+  ```
+  peer chaincode query -C channel1 -n cc -c '{"Args":["query","a"]}'
+  peer chaincode query -C channel1 -n cc -c '{"Args":["query","b"]}'
+  ```
 
   ![](images/second-query.png)
 
