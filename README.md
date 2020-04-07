@@ -253,7 +253,7 @@ Let’s confirm that our previous invocation executed properly. We initialized t
 
 ### 6. View the Kubernetes Dashboard
 
-Go to the `IBM Cloud dashboard -> Kubernetes Cluster -> <Your cluster>` 
+Go to the `IBM Cloud dashboard -> Clusters -> <Your Kubernetes cluster>` 
 
 Click on the button entitled `Kubernetes Dashboard`, 
 
