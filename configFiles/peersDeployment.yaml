@@ -1,10 +1,13 @@
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: blockchain-orderer
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      name: orderer
   template:
     metadata:
       labels:
@@ -59,12 +62,15 @@ spec:
           name: sharedvolume
 
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: blockchain-ca
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      name: ca
   template:
     metadata:
       labels:
@@ -101,12 +107,15 @@ spec:
           name: sharedvolume
 
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: blockchain-org1peer1
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      name: org1peer1
   template:
     metadata:
       labels:
@@ -187,12 +196,15 @@ spec:
         - mountPath: /host/var/run/docker.sock
           name: dockersocket
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: blockchain-org2peer1
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      name: org2peer1
   template:
     metadata:
       labels:
@@ -274,12 +286,15 @@ spec:
           name: dockersocket
 
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: blockchain-org3peer1
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      name: org3peer1
   template:
     metadata:
       labels:
@@ -361,12 +376,15 @@ spec:
           name: dockersocket
 
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: blockchain-org4peer1
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      name: org4peer1
   template:
     metadata:
       labels:
