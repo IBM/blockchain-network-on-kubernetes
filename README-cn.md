@@ -1,4 +1,5 @@
-*阅读本文的其他语言版本：[English](README.md)。*
+_本文讲解内容是基于 2018-04-06 版本，了解后续更新内容，请参考 [English](README.md)。_
+
 # 使用 IBM Cloud 上的 Kubernetes API 部署区块链网络
 
 区块链是一个不可改变的共享分类账，用于记录交易历史信息。Linux 基金会的 Hyperledger Fabric 是 IBM 致力于的区块链软件实现，是一种许可网络。无论开发何种区块链用例，首先都要为创建和部署应用建立一个 Hyperledger Fabric 开发环境。Hyperledger Fabric 网络可通过多种方式进行设置。 
