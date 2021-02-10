@@ -1,4 +1,6 @@
-# Deploy the Blockchain network using Kubernetes APIs on IBM Cloud
+# Deploy Hyperledger Fabric network on IBM Cloud
+
+### Set up your business network using Kubernetes APIs on IBM Cloud Container Service
 
 *Read this in other languages: [한국어](README-ko.md).*
 
